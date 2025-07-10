@@ -1,0 +1,6 @@
+pandas
+openpyxl
+pyautogui
+pywin32
+
+python-dotenv

@@ -1,0 +1,11 @@
+# Ignorar arquivos e pastas sensíveis ou desnecessários
+logs/
+planilhas/
+capturas_ocr/
+capturas_ocr_pyautogui/
+iphist.dat
+config/
+config.py
+__pycache__/
+*.pyc 
+.env 
