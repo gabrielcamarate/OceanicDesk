@@ -13,8 +13,6 @@ Modern and robust automation system for administrative routines at a gas station
   <img src="images/preview.png" alt="Project Preview"/>
 </p>
 
-> ### 🔗 **[Live Demo (add your link here)](#)**
-
 <br>
 
 ## 📋 Table of Contents
