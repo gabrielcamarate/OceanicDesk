@@ -112,3 +112,9 @@ Made with ❤️ by Gabriel Camarate. Get in touch!
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gabrielcamarate/)
 [![Gmail](https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:gabrielcamarate@icloud.com)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielcamarate)
+
+## 📝 Changelog
+
+### v1.4.1
+- Type and robustness fixes in `sistema.py` and `helpers.py` (Pyright compatibility)
+- Improved error handling for Excel and environment variables

@@ -112,3 +112,9 @@ Feito com ❤️ por Gabriel Camarate. Entre em contato!
 - Caso alguma variável obrigatória esteja ausente, o sistema exibirá um erro amigável e não permitirá a execução.
 - Caminhos de arquivos são checados antes de uso para evitar falhas inesperadas.
 - O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`. 
+
+## 📝 Changelog
+
+### v1.4.1
+- Correções de tipagem e robustez em `sistema.py` e `helpers.py` (compatibilidade Pyright)
+- Tratamento de erros aprimorado para Excel e variáveis de ambiente 
