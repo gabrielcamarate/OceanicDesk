@@ -50,6 +50,8 @@ def extrair_food_tmp(chacal=False):
     # Caminhos
     caminho_tmp = Path.home() / "Desktop" / "tmp.xlsx"
     caminho_meu_controle = os.getenv("CAMINHO_MEU_CONTROLE")
+    if not caminho_meu_controle:
+        raise EnvironmentError("CAMINHO_MEU_CONTROLE não definido no .env.")
 
     # Extrair valor da planilha temporária
     valor = buscar_valor_total_geral(caminho_tmp, chacal=chacal)
