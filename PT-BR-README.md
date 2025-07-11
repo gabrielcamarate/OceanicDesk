@@ -1,4 +1,4 @@
-# ⛽ Automação de Relatórios - Posto Oceanico
+# ⛽ OceanicDesk - Automação de Relatórios Posto Oceanico
 
 Sistema moderno e robusto de automação de rotinas administrativas para postos de combustível.
 
