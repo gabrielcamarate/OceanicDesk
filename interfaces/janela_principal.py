@@ -21,10 +21,10 @@ class JanelaPrincipal:
                 base_dir = os.path.dirname(sys.executable)
             else:
                 base_dir = os.path.dirname(os.path.abspath(__file__))
-            logo_path = os.path.join(base_dir, '..', 'images', 'logo.png')
-            if os.path.exists(logo_path):
-                logo_img = PhotoImage(file=logo_path)
-                self.root.iconphoto(True, logo_img)
+            ico_path = os.path.join(base_dir, '..', 'images', 'favicon.ico')
+            if os.path.exists(ico_path):
+                # Para .ico, use iconbitmap
+                self.root.iconbitmap(ico_path)
         except Exception as e:
             print(f"[Aviso] Não foi possível definir o ícone da janela: {e}")
 
@@ -158,7 +158,22 @@ class JanelaPrincipal:
         return self.caminho_planilha_dinamico
 
     def _mostrar_sobre(self):
+        # Tenta ler a versão do arquivo VERSION
+        try:
+            import os, sys
+            if getattr(sys, 'frozen', False):
+                base_dir = os.path.dirname(sys.executable)
+            else:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+            version_path = os.path.join(base_dir, '..', 'VERSION')
+            if os.path.exists(version_path):
+                with open(version_path, 'r', encoding='utf-8') as f:
+                    versao = f.read().strip()
+            else:
+                versao = 'desconhecida'
+        except Exception:
+            versao = 'desconhecida'
         messagebox.showinfo(
             "Sobre",
-            "Automação de Relatórios - Posto Oceanico\n\nAutor: Gabriel Camarate\nContato: gabrielcamarate@icloud.com\nLinkedIn: linkedin.com/in/gabrielcamarate\n\nVersão: 1.0\n\nPara dúvidas ou suporte, entre em contato."
+            f"Automação de Relatórios - Posto Oceanico\n\nAutor: Gabriel Camarate\nContato: gabrielcamarate@icloud.com\nLinkedIn: linkedin.com/in/gabrielcamarate\n\nVersão: {versao}\n\nPara dúvidas ou suporte, entre em contato."
         )
