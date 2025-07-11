@@ -49,19 +49,27 @@ CAMINHO_PLANILHA_DINAMICO = None
 
 
 def etapa1_backup_e_precos():
-    criar_backup_planilha(CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA)
-    wb = load_workbook(CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA)
+    if not CAMINHO_PLANILHA and not CAMINHO_PLANILHA_DINAMICO:
+        raise EnvironmentError("CAMINHO_PLANILHA não definido no .env e nenhum caminho dinâmico selecionado.")
+    caminho = CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA
+    assert caminho is not None, "Caminho da planilha não pode ser None."
+    criar_backup_planilha(caminho)
+    wb = load_workbook(caminho)
     copiar_intervalo_k5_r14(wb, DATA_HOJE)
     formatar_coluna_o_em_vermelho(wb, DATA_HOJE)
-    wb.save(CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA)
+    wb.save(caminho)
 
 
 def etapa2_minimercado():
+    if not LOGIN_SISTEMA or not SENHA_SISTEMA:
+        raise EnvironmentError("LOGIN_SISTEMA ou SENHA_SISTEMA não definido no .env.")
+    caminho = CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA
+    assert caminho is not None, "Caminho da planilha não pode ser None."
     auto_system_login(LOGIN_SISTEMA, SENHA_SISTEMA)
     valor = extrair_valor_tmp()
-    wb = load_workbook(CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA)
+    wb = load_workbook(caminho)
     inserir_valor_planilha(wb, valor, DATA_HOJE)
-    wb.save(CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA)
+    wb.save(caminho)
     messagebox.showinfo("Etapa 2", "Relatório mini-mercado salvo na planilha.")
     
 
