@@ -1,6 +1,7 @@
 import os
 import openpyxl
 from openpyxl import load_workbook
+from pathlib import Path
 
 
 def atualizar_valores_de_vendas_geral(
@@ -8,7 +9,10 @@ def atualizar_valores_de_vendas_geral(
 ) -> None:
     from win32com.client import gencache
 
-    if not os.path.exists(caminho_arquivo_copia):
+    caminho_arquivo_copia = Path(caminho_arquivo_copia)
+    caminho_arquivo_meu_controle = Path(caminho_arquivo_meu_controle)
+
+    if not caminho_arquivo_copia.exists():
         raise FileNotFoundError(f"Arquivo não encontrado: {caminho_arquivo_copia}")
 
     excel = gencache.EnsureDispatch("Excel.Application")

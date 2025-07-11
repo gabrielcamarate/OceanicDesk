@@ -1,8 +1,10 @@
 import os
 import shutil
+from pathlib import Path
 
 
 def criar_backup_planilha(caminho_arquivo):
+    caminho_arquivo = Path(caminho_arquivo)
     backup_path = caminho_arquivo.with_name(
         caminho_arquivo.name.replace(".xlsx", " - BACKUP.xlsx")
     )

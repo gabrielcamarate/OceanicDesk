@@ -2,6 +2,7 @@ import pandas as pd
 import openpyxl
 import calendar
 from datetime import datetime
+from pathlib import Path
 
 LETRA_PLANILHA = "H"
 
@@ -12,6 +13,10 @@ def atualizar_projecao_vendas(
     nome_aba_vendas: str = "Abril",
     nome_aba_chacaltaya: str = "Julho",
 ) -> None:
+    caminho_arquivo_chacaltaya = Path(caminho_arquivo_chacaltaya)
+    caminho_arquivo_vendas = Path(caminho_arquivo_vendas)
+    caminho_arquivo_destino = Path(caminho_arquivo_destino)
+
     df_chacaltaya = pd.read_excel(
         caminho_arquivo_chacaltaya, sheet_name=nome_aba_chacaltaya, engine="openpyxl"
     )

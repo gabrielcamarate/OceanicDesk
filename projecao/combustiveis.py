@@ -2,9 +2,12 @@ import pandas as pd
 import openpyxl
 import xlwings as xw
 from datetime import datetime, timedelta
+from pathlib import Path
 
 
 def atualizar_combustiveis(caminho_vendas: str, caminho_destino: str) -> None:
+    caminho_vendas = Path(caminho_vendas)
+    caminho_destino = Path(caminho_destino)
     data_ontem = datetime.today() - timedelta(days=1)
     nome_aba = f"Dia {data_ontem.day:02d}"
     linha_destino = data_ontem.day + 4
@@ -31,6 +34,8 @@ def atualizar_combustiveis(caminho_vendas: str, caminho_destino: str) -> None:
 def atualizar_dados_projecao_combustiveis(
     caminho_vendas: str, caminho_projecao: str
 ) -> None:
+    caminho_vendas = Path(caminho_vendas)
+    caminho_projecao = Path(caminho_projecao)
     from win32com.client import gencache
 
     excel = gencache.EnsureDispatch("Excel.Application")
