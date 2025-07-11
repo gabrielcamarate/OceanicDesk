@@ -3,27 +3,34 @@ import time
 import webbrowser
 from pywinauto.application import Application
 from pywinauto import timings
-
+from config import EMAIL_REMETENTE, SENHA_EMAIL
+import os
 
 
 def enviar_relatorio(caminho_arquivo, data_ontem, chacal=False):
+    # Checagem elegante das variáveis de email
+    destinatario = os.getenv("EMAIL_DESTINATARIO")
+    if not EMAIL_REMETENTE or not SENHA_EMAIL or not destinatario:
+        raise EnvironmentError(
+            "EMAIL_REMETENTE, SENHA_EMAIL ou EMAIL_DESTINATARIO ausente no .env. Preencha corretamente."
+        )
     webmail_url = "https://webmail-seguro.com.br/rededuque.com.br/?_task=login"
     webbrowser.open(webmail_url)
     time.sleep(4)
     pyautogui.hotkey("ctrl", "a", interval=1)
     pyautogui.press("backspace", interval=1)
 
-    pyautogui.write("postojardimoceanico@admrededuque.com.br")
+    pyautogui.write(EMAIL_REMETENTE)
     pyautogui.press("tab")
     time.sleep(1)
-    pyautogui.write("Duque60@")
+    pyautogui.write(SENHA_EMAIL)
     pyautogui.alert("🚧 Resolva o CAPTCHA manualmente e clique em OK para continuar.")
     pyautogui.press("tab", presses=3, interval=0.2)
     pyautogui.press("enter")
     time.sleep(2)
     pyautogui.click(96, 231)
     time.sleep(1)
-    pyautogui.write("wagner.fernandes@rededuque.com.br")
+    pyautogui.write(destinatario)
     time.sleep(1)
     pyautogui.press("tab")
     time.sleep(1)
