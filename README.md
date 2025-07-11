@@ -1,4 +1,4 @@
-# ⛽ Oceanic Gas Station Automation
+# ⛽ OceanicDesk - Oceanic Gas Station Automation
 
 Modern and robust automation system for administrative routines at a gas station.
 
