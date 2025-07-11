@@ -53,6 +53,13 @@ Modern and robust automation system for administrative routines at a gas station
 
 <br>
 
+## 🛡️ Robustez e Boas Práticas
+
+- O sistema exige que variáveis sensíveis (login, senha, caminhos de planilhas, email) estejam corretamente preenchidas no arquivo `.env`.
+- Caso alguma variável obrigatória esteja ausente, o sistema exibirá um erro amigável e não permitirá a execução.
+- Caminhos de arquivos são checados antes de uso para evitar falhas inesperadas.
+- O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`.
+
 ## 🚀 How to Run
 
 ```bash

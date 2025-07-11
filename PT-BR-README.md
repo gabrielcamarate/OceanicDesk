@@ -105,3 +105,10 @@ Feito com ❤️ por Gabriel Camarate. Entre em contato!
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gabrielcamarate/)
 [![Gmail](https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:gabrielcamarate@icloud.com)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielcamarate) 
+
+## 🛡️ Robustez e Boas Práticas
+
+- O sistema exige que variáveis sensíveis (login, senha, caminhos de planilhas, email) estejam corretamente preenchidas no arquivo `.env`.
+- Caso alguma variável obrigatória esteja ausente, o sistema exibirá um erro amigável e não permitirá a execução.
+- Caminhos de arquivos são checados antes de uso para evitar falhas inesperadas.
+- O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`. 
