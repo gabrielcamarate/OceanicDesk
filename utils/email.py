@@ -52,7 +52,7 @@ def enviar_relatorio(caminho_arquivo, data_ontem, chacal=False):
         pyautogui.alert("🚧 Selecione os arquivos e clique em OK para continuar.")
     else:
         pyautogui.write(str(caminho_arquivo))
-    time.sleep(1.5)
+    time.sleep(3)
     pyautogui.click(504, 534)
     time.sleep(2)
     pyautogui.click(254, 164)
