@@ -13,8 +13,6 @@ Sistema moderno e robusto de automação de rotinas administrativas para postos 
   <img src="images/preview.png" alt="Demonstração do Projeto"/>
 </p>
 
-> ### 🔗 **[Acesse a demonstração ao vivo (adicione seu link)](#)**
-
 <br>
 
 ## 📋 Índice
