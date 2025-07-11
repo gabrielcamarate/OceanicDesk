@@ -16,14 +16,16 @@ class JanelaPrincipal:
         try:
             import os
             import sys
-            from tkinter import PhotoImage
             if getattr(sys, 'frozen', False):
                 base_dir = os.path.dirname(sys.executable)
             else:
                 base_dir = os.path.dirname(os.path.abspath(__file__))
-            ico_path = os.path.join(base_dir, '..', 'images', 'favicon.ico')
+            # Caminho correto para build e dev
+            ico_path = os.path.join(base_dir, 'images', 'favicon.ico')
+            if not os.path.exists(ico_path):
+                # fallback: mesmo diretório do exe
+                ico_path = os.path.join(base_dir, 'favicon.ico')
             if os.path.exists(ico_path):
-                # Para .ico, use iconbitmap
                 self.root.iconbitmap(ico_path)
         except Exception as e:
             print(f"[Aviso] Não foi possível definir o ícone da janela: {e}")
