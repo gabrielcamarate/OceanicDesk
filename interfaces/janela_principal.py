@@ -13,6 +13,20 @@ class JanelaPrincipal:
         self.root.title("Painel de Controle - Relatórios Oceanico")
         self.root.geometry("650x600")
         self.root.configure(padx=10, pady=10)
+        try:
+            import os
+            import sys
+            from tkinter import PhotoImage
+            if getattr(sys, 'frozen', False):
+                base_dir = os.path.dirname(sys.executable)
+            else:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+            logo_path = os.path.join(base_dir, '..', 'images', 'logo.png')
+            if os.path.exists(logo_path):
+                logo_img = PhotoImage(file=logo_path)
+                self.root.iconphoto(True, logo_img)
+        except Exception as e:
+            print(f"[Aviso] Não foi possível definir o ícone da janela: {e}")
 
         self._criar_interface()
 
@@ -79,6 +93,10 @@ class JanelaPrincipal:
             self.root, text="Selecionar Planilha", command=self._selecionar_planilha
         ).pack(pady=6)
 
+        tk.Button(
+            self.root, text="Sobre", command=self._mostrar_sobre
+        ).pack(pady=2)
+
         self.painel_log = tk.Text(self.root, height=6, width=70, bg="#f4f4f4")
         self.painel_log.pack(pady=6)
 
@@ -138,3 +156,9 @@ class JanelaPrincipal:
 
     def obter_caminho_planilha_dinamico(self):
         return self.caminho_planilha_dinamico
+
+    def _mostrar_sobre(self):
+        messagebox.showinfo(
+            "Sobre",
+            "Automação de Relatórios - Posto Oceanico\n\nAutor: Gabriel Camarate\nContato: gabrielcamarate@icloud.com\nLinkedIn: linkedin.com/in/gabrielcamarate\n\nVersão: 1.0\n\nPara dúvidas ou suporte, entre em contato."
+        )
