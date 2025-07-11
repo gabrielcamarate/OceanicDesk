@@ -17,3 +17,11 @@
 - Added “About” button with app information.
 - Generated README_USUARIO.txt for end-user instructions.
 - Build adjustments for .zip distribution. 
+## [1.4.0] - 2025-07-11
+### Added
+- Elegant checking of required environment variables (.env) throughout the project.
+- Friendly errors if sensitive variables are missing.
+- Robustness in the use of file paths and credentials.
+- Possibility to configure Tesseract path via TESSERACT_CMD.
+- Robustness documentation in README.
+
