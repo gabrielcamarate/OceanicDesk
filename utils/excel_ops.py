@@ -172,21 +172,25 @@ def atualizando_planilhas_projecao():
     caminho_combustivel = os.getenv("CAMINHO_COMBUSTIVEL")
     caminho_copia = os.getenv("CAMINHO_COPIA_MES")
 
-    if not all(
-        [
-            caminho_chacaltaya,
-            caminho_oceanico_vendas,
-            caminho_oceanico,
-            caminho_controle,
-            caminho_combustivel,
-            caminho_copia,
-        ]
-    ):
-        raise EnvironmentError(
-            "Alguma variável de caminho está ausente no arquivo .env"
-        )
-
-    
+    caminhos = [
+        caminho_chacaltaya,
+        caminho_oceanico_vendas,
+        caminho_oceanico,
+        caminho_controle,
+        caminho_combustivel,
+        caminho_copia,
+    ]
+    nomes = [
+        "CAMINHO_CHACALTAYA",
+        "CAMINHO_PLANILHA_VENDAS",
+        "CAMINHO_PLANILHA",
+        "CAMINHO_MEU_CONTROLE",
+        "CAMINHO_COMBUSTIVEL",
+        "CAMINHO_COPIA_MES",
+    ]
+    faltantes = [n for n, v in zip(nomes, caminhos) if not v]
+    if faltantes:
+        raise EnvironmentError(f"Variável(is) de caminho ausente(s) no .env: {', '.join(faltantes)}")
 
     atualizar_projecao_vendas(
         caminho_arquivo_chacaltaya=caminho_chacaltaya,
