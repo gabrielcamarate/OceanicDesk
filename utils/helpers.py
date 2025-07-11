@@ -11,6 +11,8 @@ def carregar_tmp_excel():
     Retorna o caminho completo do primeiro encontrado.
     """
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+    if not os.path.exists(desktop):
+        raise FileNotFoundError("A área de trabalho não foi encontrada.")
     for nome_arquivo in os.listdir(desktop):
         if nome_arquivo.startswith("tmp") and nome_arquivo.endswith(".xlsx"):
             return os.path.join(desktop, nome_arquivo)
