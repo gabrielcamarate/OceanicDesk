@@ -62,6 +62,8 @@ def atualizar_meu_controle(dia_fim, chacal=False):
 
     # Caminho da planilha do controle
     caminho_meu_controle = os.getenv("CAMINHO_MEU_CONTROLE")
+    if not caminho_meu_controle:
+        raise EnvironmentError("CAMINHO_MEU_CONTROLE não definido no .env.")
 
     # Abrir a planilha
     wb_controle = load_workbook(caminho_meu_controle)
