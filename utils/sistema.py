@@ -11,6 +11,7 @@ from utils.relatorios.food import atualizar_meu_controle
 from utils.extratores import salvar_planilha_emsys
 from utils.file_utils import corrigir_cache_excel_com
 from utils.helpers import esperar_elemento
+import pygetwindow as gw
 
 def mostrar_area_de_trabalho():
     """Minimiza todas as janelas no Windows."""
@@ -263,7 +264,7 @@ def processar_relatorio_excel_cashback_pix():
 
     desktop_tmp = os.path.join(os.path.expanduser("~"), "Desktop", "tmp.xlsx")
     aguardar_arquivo(desktop_tmp)
-    excel = win32.gencache.EnsureDispatch("Excel.Application")
+    excel = win32.gencache.EnsureDispatch("Excel.Application") # type: ignore
     excel.Visible = True
     wb = excel.Workbooks.Open(desktop_tmp)
     time.sleep(10)
@@ -278,22 +279,36 @@ def processar_relatorio_excel_cashback_pix():
     pagarme_valor = None
     pix_valor = None
 
-    for row in ws_tmp.iter_rows():
-        for cell in row:
-            if isinstance(cell, MergedCell):
-                continue
-            if cell.value is not None:
-                valor = str(cell.value).strip().upper()
-                if valor == "CASHBACK MARKA":
-                    cashback_valor = row[15].value
-                elif valor == "PAGAR.ME INSTITUICAO DE PAGAMENTO S.A":
-                    pagarme_valor = row[15].value
-                elif valor == "PIX - CIELO":
-                    pix_valor = row[15].value
+    if ws_tmp is not None:
+        for row in ws_tmp.iter_rows():
+            for cell in row:
+                if isinstance(cell, MergedCell):
+                    continue
+                if cell.value is not None:
+                    valor = str(cell.value).strip().upper()
+                    if valor == "CASHBACK MARKA":
+                        cashback_valor = row[15].value
+                    elif valor == "PAGAR.ME INSTITUICAO DE PAGAMENTO S.A":
+                        pagarme_valor = row[15].value
+                    elif valor == "PIX - CIELO":
+                        pix_valor = row[15].value
+    else:
+        logger.warning("ws_tmp é None. Não foi possível iterar pelas linhas.")
+
+    def safe_float(val):
+        from decimal import Decimal
+        if isinstance(val, (int, float)):
+            return float(val)
+        if isinstance(val, Decimal):
+            return float(val)
+        try:
+            return float(str(val).replace(',', '.'))
+        except Exception:
+            return 0.0
 
     pagarme_valor = pagarme_valor or 0
     pix_valor = pix_valor or 0
-    total_pix = pagarme_valor + pix_valor
+    total_pix = safe_float(pagarme_valor) + safe_float(pix_valor)
 
     if os.path.exists(desktop_tmp):
         os.remove(desktop_tmp)

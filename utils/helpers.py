@@ -45,15 +45,18 @@ def calcular_expressao(expr):
 
 
 
-def esperar_elemento(caminho_imagem, timeout=60, confidence=0.9):
+def esperar_elemento(caminho_imagem, timeout=60, confidence=0.8):
     inicio = time.time()
     while time.time() - inicio < timeout:
         try:
             local = pyautogui.locateOnScreen(caminho_imagem, confidence=confidence)
+            print(local)
             if local:
                 return local
+            else:
+                pass
         except pyautogui.ImageNotFoundException:
             # imagem não encontrada nesta tentativa, só ignora e tenta de novo
             pass
-        time.sleep(0.3)
+        time.sleep(1)
     raise TimeoutError(f"[OCR] Elemento '{os.path.basename(caminho_imagem)}' não encontrado após {timeout} segundos.")
