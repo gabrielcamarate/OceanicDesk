@@ -173,13 +173,13 @@ def atualizando_planilhas_projecao():
     caminho_copia = os.getenv("CAMINHO_COPIA_MES")
 
     caminhos = [
-        caminho_chacaltaya,
-        caminho_oceanico_vendas,
-        caminho_oceanico,
-        caminho_controle,
-        caminho_combustivel,
-        caminho_copia,
-    ]
+            caminho_chacaltaya,
+            caminho_oceanico_vendas,
+            caminho_oceanico,
+            caminho_controle,
+            caminho_combustivel,
+            caminho_copia,
+        ]
     nomes = [
         "CAMINHO_CHACALTAYA",
         "CAMINHO_PLANILHA_VENDAS",
