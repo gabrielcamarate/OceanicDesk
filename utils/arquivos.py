@@ -1,7 +1,7 @@
 import os
 import shutil
 from pathlib import Path
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def criar_backup_planilha(caminho_arquivo):
