@@ -1,5 +1,19 @@
 # Changelog - OceanicDesk
 
+## [1.4.6] - 2025-07-12
+
+### 🏗️ Arquitetura
+- **Preparação para Modularização**: Adicionado sistema de alertas em `interfaces/` mantendo compatibilidade
+- **Migração Gradual**: Sistema de alertas disponível em ambos os diretórios para transição segura
+- **Backward Compatibility**: Mantida funcionalidade completa com versão anterior
+
+### 🔧 Melhorias Técnicas
+- **Duplicação Segura**: Sistema de alertas copiado para `interfaces/` sem quebrar funcionalidade existente
+- **Preparação para Refatoração**: Base preparada para migração gradual de imports
+- **Testes de Compatibilidade**: Verificação de que ambas versões funcionam corretamente
+
+---
+
 ## [1.4.5] - 2024-12-19
 
 ### Corrigido
