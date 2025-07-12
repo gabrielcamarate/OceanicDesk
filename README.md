@@ -4,7 +4,7 @@ Modern and robust automation system for administrative routines at a gas station
 
 [🇺🇸 English Version](README.md) | [🇧🇷 Versão em Português](PT-BR-README.md)
 
-![GitHub language count](https://img.shields.io/github/languages/count/gabrielcamarate/Projeto_posto?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/gabrielcamarate/OceanicDesk?style=for-the-badge)
 
 <br>
 
