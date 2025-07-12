@@ -12,12 +12,15 @@ from utils.extratores import salvar_planilha_emsys
 from utils.file_utils import corrigir_cache_excel_com
 from utils.helpers import esperar_elemento
 from utils.path_utils import get_captura_path, get_system_path, get_desktop_path
+from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 import pygetwindow as gw
 from dotenv import load_dotenv
 load_dotenv()
 
 def mostrar_area_de_trabalho():
     """Minimiza todas as janelas no Windows."""
+    mostrar_alerta_visual("Minimizando janelas", "Preparando área de trabalho...", tipo="dev")
+    
     import platform
     import ctypes
     import time
@@ -28,35 +31,65 @@ def mostrar_area_de_trabalho():
         ctypes.windll.user32.keybd_event(0x44, 0, 2, 0)  # D up
         ctypes.windll.user32.keybd_event(0x5B, 0, 2, 0)  # Win up
         time.sleep(1)
+        mostrar_alerta_visual("Área de trabalho limpa", "Janelas minimizadas", tipo="success")
 
 
 def abrir_auto_system():
+    mostrar_alerta_visual("Abrindo AutoSystem", "Iniciando aplicação...", tipo="info")
+    
     caminho_app = get_system_path("autosystem")
+    
+    if not os.path.exists(caminho_app):
+        mostrar_alerta_visual("Erro: AutoSystem não encontrado", f"Caminho: {caminho_app}", tipo="error")
+        raise FileNotFoundError(f"AutoSystem não encontrado em: {caminho_app}")
+    
+    mostrar_alerta_visual("Validando arquivo", f"AutoSystem encontrado: {os.path.basename(caminho_app)}", tipo="dev")
+    
     mostrar_area_de_trabalho()
     os.startfile(caminho_app)
     logger.info("Abrindo AutoSystem...")
+    
+    mostrar_alerta_visual("Aguardando carregamento", "Aguardando tela de login...", tipo="info")
     esperar_elemento(get_captura_path("autosystem_login.png"), timeout=60)
+    mostrar_alerta_visual("AutoSystem carregado", "Tela de login exibida", tipo="success")
 
 
 def fazer_login(usuario: str, senha: str):
+    mostrar_alerta_visual("Realizando login", f"Usuário: {usuario}", tipo="info")
+    
     logger.info("Efetuando login...")
     pyautogui.write(usuario, interval=0.1)
+    mostrar_alerta_visual("Usuário inserido", "Campo usuário preenchido", tipo="dev")
+    
     pyautogui.press("tab")
     pyautogui.write(senha, interval=0.1)
+    mostrar_alerta_visual("Senha inserida", "Campo senha preenchido", tipo="dev")
+    
     pyautogui.press("enter")
+    mostrar_alerta_visual("Login enviado", "Aguardando autenticação...", tipo="info")
+    
     esperar_elemento(get_captura_path("autosystem_remove_alert.png"), timeout=60)
+    mostrar_alerta_visual("Login realizado", "Autenticação bem-sucedida", tipo="success")
+    
     pyautogui.moveTo(1095, 13)
     pyautogui.click()
+    mostrar_alerta_visual("Alerta removido", "Interface limpa", tipo="dev")
 
 
 def navegar_para_relatorio_produtividade():
+    mostrar_alerta_visual("Navegando para relatório", "Acessando menu de produtividade...", tipo="info")
+    
     logger.info("Navegando até relatório de produtividade...")
     time.sleep(2)
     pyautogui.moveTo(782, 452)
     pyautogui.click()
+    mostrar_alerta_visual("Menu acessado", "Primeira seleção realizada", tipo="dev")
+    
     time.sleep(2)
     pyautogui.moveTo(942, 330)
     pyautogui.click()
+    mostrar_alerta_visual("Submenu selecionado", "Segunda seleção realizada", tipo="dev")
+    
     time.sleep(2)
     pyautogui.moveTo(49, 31, duration=0.5)
     pyautogui.click()
@@ -66,25 +99,38 @@ def navegar_para_relatorio_produtividade():
     pyautogui.moveTo(342, 656, duration=0.8)
     pyautogui.click()
     time.sleep(2)
+    
+    mostrar_alerta_visual("Relatório acessado", "Tela de produtividade carregada", tipo="success")
 
 
 def preencher_filtros_e_gerar():
+    mostrar_alerta_visual("Preenchendo filtros", "Configurando parâmetros do relatório...", tipo="info")
+    
     pyautogui.press("tab")
     pyautogui.write("1612", interval=0.1)
+    mostrar_alerta_visual("Código inserido", "Código 1612 preenchido", tipo="dev")
+    
     for _ in range(4):
         pyautogui.press("tab")
     pyautogui.write("50", interval=0.1)
+    mostrar_alerta_visual("Quantidade inserida", "Quantidade 50 preenchida", tipo="dev")
+    
     for _ in range(5):
         pyautogui.press("tab")
 
     data_ontem = (datetime.today() - timedelta(days=1)).strftime("%d/%m/%Y")
     pyautogui.write(data_ontem, interval=0.1)
+    mostrar_alerta_visual("Data inicial", f"Data: {data_ontem}", tipo="dev")
+    
     pyautogui.press("tab")
     pyautogui.write(data_ontem, interval=0.1)
+    mostrar_alerta_visual("Data final", f"Data: {data_ontem}", tipo="dev")
 
     pyautogui.moveTo(465, 456, duration=0.8)
     pyautogui.click()
     time.sleep(1)
+    mostrar_alerta_visual("Filtros aplicados", "Configurações salvas", tipo="dev")
+    
     for _ in range(5):
         time.sleep(0.2)
         pyautogui.press("tab")
@@ -93,9 +139,13 @@ def preencher_filtros_e_gerar():
         pyautogui.press("tab")
     pyautogui.press("enter")
     time.sleep(2)
+    
+    mostrar_alerta_visual("Relatório gerado", "Dados processados com sucesso", tipo="success")
 
 
 def exportar_relatorio_excel():
+    mostrar_alerta_visual("Exportando relatório", "Preparando exportação para Excel...", tipo="info")
+    
     logger.info("Exportando relatório para Excel...")
     pyautogui.moveTo(143, 39)
     pyautogui.click()
@@ -103,6 +153,8 @@ def exportar_relatorio_excel():
     pyautogui.moveTo(596, 451)
     pyautogui.click()
     time.sleep(6)
+    mostrar_alerta_visual("Exportação iniciada", "Aguardando processamento...", tipo="dev")
+    
     pyautogui.moveTo(194, 743, duration=0.5)
     time.sleep(0.5)
     pyautogui.click()
@@ -123,18 +175,26 @@ def exportar_relatorio_excel():
     pyautogui.press("enter", presses=2, interval=0.2)
     pyautogui.hotkey("ctrl", "w")
     time.sleep(2)
+    
     logger.info("✅ Relatório exportado.")
+    mostrar_alerta_visual("Relatório exportado", "Arquivo tmp.xlsx salvo no Desktop", tipo="success")
 
 
 def auto_system_login(usuario: str, senha: str):
+    mostrar_alerta_visual("Iniciando AutoSystem", "Sequência completa de login", tipo="info")
+    
     abrir_auto_system()
     fazer_login(usuario, senha)
     navegar_para_relatorio_produtividade()
     preencher_filtros_e_gerar()
     exportar_relatorio_excel()
+    
+    mostrar_alerta_visual("AutoSystem concluído", "Processo completo finalizado", tipo="success")
 
 
 def abrir_relatorio_vendas_detalhado():
+    mostrar_alerta_visual("Abrindo vendas detalhado", "Acessando relatório de vendas...", tipo="info")
+    
     logger.info("Abrindo relatório de vendas detalhado...")
     pyautogui.click(109, 28)
     time.sleep(1)
@@ -145,9 +205,13 @@ def abrir_relatorio_vendas_detalhado():
     pyautogui.moveTo(771, 268, duration=0.5)
     time.sleep(1)
     pyautogui.click()
+    
+    mostrar_alerta_visual("Vendas detalhado aberto", "Relatório carregado com sucesso", tipo="success")
 
 
 def aplicar_filtros_vendas_detalhado():
+    mostrar_alerta_visual("Aplicando filtros", "Configurando parâmetros de vendas...", tipo="info")
+    
     logger.info("Aplicando filtros...")
     pyautogui.click(1069, 212)
     time.sleep(1)
@@ -162,16 +226,24 @@ def aplicar_filtros_vendas_detalhado():
     pyautogui.press("backspace", presses=8, interval=0.2)
     data_ontem = (datetime.today() - timedelta(days=1)).strftime("%d/%m/%Y")
     pyautogui.write(data_ontem, interval=0.1)
+    mostrar_alerta_visual("Data configurada", f"Período: {data_ontem}", tipo="dev")
+    
     pyautogui.click(521, 471, duration=0.5)
     pyautogui.click(541, 531, duration=0.5)
     pyautogui.click(631, 530, duration=0.5)
     time.sleep(0.5)
+    
+    mostrar_alerta_visual("Filtros aplicados", "Configurações salvas", tipo="success")
 
 
 def gerar_e_exportar_vendas_detalhado():
+    mostrar_alerta_visual("Gerando vendas detalhado", "Processando relatório...", tipo="info")
+    
     logger.info("Gerando e exportando relatório...")
     pyautogui.click(396, 678)
     time.sleep(4)
+    mostrar_alerta_visual("Relatório processado", "Dados gerados com sucesso", tipo="dev")
+    
     pyautogui.click(144, 38)
     time.sleep(0.5)
     pyautogui.click(593, 450)
@@ -196,7 +268,9 @@ def gerar_e_exportar_vendas_detalhado():
     pyautogui.press("enter", presses=2, interval=0.2)
     pyautogui.hotkey("ctrl", "w")
     time.sleep(5)
+    
     logger.info("✅ Relatório detalhado exportado.")
+    mostrar_alerta_visual("Vendas detalhado exportado", "Arquivo salvo no Desktop", tipo="success")
 
 
 def auto_system_relatorio_litro_e_desconto():
@@ -213,6 +287,7 @@ def abrir_emsys3():
 
 
 def login_emsys3():
+    mostrar_alerta_visual("Login EMSys3", "Iniciando login do usuário EMSys3...", tipo="info")
     pyautogui.press("down", presses=8, interval=0.2)
     pyautogui.press("enter")
     time.sleep(6.5)
@@ -227,6 +302,7 @@ def login_emsys3():
     pyautogui.write(senha)
     pyautogui.press("enter")
     esperar_elemento(get_captura_path("emsys_alert.png"), timeout=60)
+    mostrar_alerta_visual("Login realizado com sucesso", "Usuário autenticado no EMSys3.", tipo="success")
 
 
 def acessar_relatorio_pix():

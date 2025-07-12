@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.4.4] - 2024-12-19
+### Adicionado
+- Sistema de alertas visuais moderno e abrangente em todo o projeto
+- Alertas detalhados para todas as etapas, funções e operações do sistema
+- Controle de posicionamento automático para múltiplos alertas simultâneos
+- Alertas de progresso com barra de progresso para operações longas
+- Tipos de alerta: success, error, info, dev, warning, progress
+- Alertas específicos para logs técnicos (tipo 'dev') e informações para usuário final
+- Sistema de alertas não intrusivo com fade in/out e opacidade reduzida
+
+### Melhorado
+- Transparência total do sistema com alertas para cada ação, por menor que seja
+- Alertas visuais em todas as etapas do processo (1-8)
+- Alertas detalhados em operações de Excel, automação, OCR e relatórios
+- Alertas de validação e verificação de arquivos e configurações
+- Alertas de progresso em loops e operações repetitivas
+- Alertas de erro com informações detalhadas para troubleshooting
+- Alertas de sucesso com confirmação de conclusão de tarefas
+
+### Alterado
+- Módulo `utils/alerta_visual.py` completamente reformulado com novas funcionalidades
+- Todas as funções principais agora incluem alertas visuais detalhados
+- Sistema de logging integrado com alertas visuais para eventos importantes
+- Interface mais informativa e transparente para o usuário
+- Melhor experiência de usuário com feedback visual constante
+
+### Corrigido
+- Alertas visuais agora seguem padrão consistente em todo o projeto
+- Tipos de alerta padronizados (dev apenas para logs técnicos)
+- Posicionamento automático evita sobreposição de alertas
+- Controle de múltiplos alertas simultâneos
+
 ## [1.4.3] - 2024-12-19
 ### Segurança
 - Removidos dados sensíveis hardcoded (usuários e senhas) do código

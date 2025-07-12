@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from config import MODO_DEV
 from utils.logger import registrar_log
+from utils.alerta_visual import mostrar_alerta_visual
 
 
 class JanelaPrincipal:
@@ -18,6 +19,7 @@ class JanelaPrincipal:
         self._carregar_icone()
 
         self._criar_interface()
+        mostrar_alerta_visual("Bem-vindo ao OceanicDesk!", "Sistema pronto para uso.", tipo="info")
 
     def _carregar_icone(self):
         """
@@ -177,6 +179,7 @@ class JanelaPrincipal:
         funcao_etapa(completo=(resposta == "no"))
 
     def _selecionar_planilha(self):
+        mostrar_alerta_visual("Selecionando planilha...", "Aguarde enquanto a janela de seleção é aberta.", tipo="info")
         caminho = filedialog.askopenfilename(
             title="Selecione a planilha", filetypes=[("Excel files", "*.xlsx")]
         )
@@ -185,6 +188,9 @@ class JanelaPrincipal:
             messagebox.showinfo(
                 "Planilha selecionada", f"Planilha definida:\n{caminho}"
             )
+            mostrar_alerta_visual("Planilha selecionada", f"{caminho}", tipo="success")
+        else:
+            mostrar_alerta_visual("Seleção cancelada", "Nenhuma planilha foi selecionada.", tipo="info")
 
     def _atualizar_painel(self, texto):
         if self.modo_dev:
@@ -197,6 +203,10 @@ class JanelaPrincipal:
 
     def _alternar_modo(self):
         self.modo_dev = not self.modo_dev
+        if self.modo_dev:
+            mostrar_alerta_visual("Modo desenvolvedor ativado", "Logs detalhados serão exibidos.", tipo="dev")
+        else:
+            mostrar_alerta_visual("Modo simples ativado", "Logs resumidos.", tipo="info")
         self._atualizar_painel(
             "Modo desenvolvedor ativado." if self.modo_dev else "Modo simples."
         )
@@ -210,6 +220,7 @@ class JanelaPrincipal:
         return self.caminho_planilha_dinamico
 
     def _mostrar_sobre(self):
+        mostrar_alerta_visual("Sobre o sistema", "Exibindo informações do OceanicDesk.", tipo="info")
         # Tenta ler a versão do arquivo VERSION
         try:
             import os, sys
