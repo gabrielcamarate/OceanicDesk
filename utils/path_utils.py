@@ -5,7 +5,9 @@ Utilitários para resolver caminhos de arquivos em desenvolvimento e quando comp
 import os
 import sys
 from pathlib import Path
-from utils.alerta_visual import mostrar_alerta_visual
+from typing import Optional
+from config import CAMINHO_PLANILHA
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def get_project_root():

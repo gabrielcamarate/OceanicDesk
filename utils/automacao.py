@@ -12,7 +12,7 @@ from utils.duplicata_ocr import (
 from interfaces.metodos_pagamento import coletar_formas_pagamento
 from interfaces.valores_fechamento import abrir_janela_valores
 from utils.sistema import salvar_planilha_emsys, acessar_relatorio_subcategoria
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 
 
 def aguardar_usuario() -> None:

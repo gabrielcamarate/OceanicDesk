@@ -17,83 +17,87 @@ from projecao.combustiveis import (
 )
 from projecao.consolidado import atualizar_valores_de_vendas_geral
 from tkinter import messagebox
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso, atualizar_progresso, fechar_progresso
+import time
+import openpyxl.styles
+from openpyxl.styles import PatternFill
+from openpyxl.utils import get_column_letter
 load_dotenv()
 
 
 LETRA_PLANILHA = "H"
 
 def copiar_intervalo_k5_r14(wb, data_referencia):
-    mostrar_alerta_visual("Copiando intervalo K5:R14", "Processando planilha...", tipo="info")
-    
-    dia_origem = data_referencia - timedelta(days=2)
-    dia_destino = data_referencia - timedelta(days=1)
-    nome_aba_origem = f"Dia {dia_origem.day:02d}"
-    nome_aba_destino = f"Dia {dia_destino.day:02d}"
-
-    mostrar_alerta_visual("Validando abas", f"Origem: {nome_aba_origem} | Destino: {nome_aba_destino}", tipo="dev")
-
-    if nome_aba_origem not in wb.sheetnames or nome_aba_destino not in wb.sheetnames:
-        mostrar_alerta_visual("Erro: Abas não encontradas", f"Verificar: {nome_aba_origem} ou {nome_aba_destino}", tipo="error")
-        raise ValueError(
-            f"Aba '{nome_aba_origem}' ou '{nome_aba_destino}' não encontrada no arquivo."
-        )
-
-    sheet_origem = wb[nome_aba_origem]
-    sheet_destino = wb[nome_aba_destino]
-
-    mostrar_alerta_visual("Iniciando cópia", "Transferindo dados K5:R14...", tipo="info")
-    
-    # Contador para progresso
-    total_celulas = 0
-    celulas_copiadas = 0
-    
-    for row in range(5, 15):
-        for col in range(11, 19):
-            total_celulas += 1
-            valor = sheet_origem.cell(row=row, column=col).value
-            destino_cell = sheet_destino.cell(row=row, column=col)
-            if isinstance(destino_cell, MergedCell):
-                continue
-            destino_cell.value = valor
-            celulas_copiadas += 1
-            
-            # Mostra progresso a cada 10 células
-            if celulas_copiadas % 10 == 0:
-                progresso = int((celulas_copiadas / total_celulas) * 100)
-                mostrar_alerta_progresso("Copiando dados", f"Progresso: {progresso}%", progresso)
-
-    print(
-        f"[Cópia] Intervalo K5:R14 copiado de '{nome_aba_origem}' para '{nome_aba_destino}'."
-    )
-    mostrar_alerta_visual("Intervalo copiado com sucesso", f"K5:R14 transferido - {celulas_copiadas} células", tipo="success")
+    """Copia o intervalo K5:R14 da aba de ontem para a aba de hoje"""
+    try:
+        # Inicia progresso
+        atualizar_progresso("Excel: Copiando", "Localizando abas de origem e destino...", 20)
+        
+        # Encontra as abas
+        aba_ontem = None
+        aba_hoje = None
+        
+        for sheet in wb.sheetnames:
+            if data_referencia in sheet:
+                aba_hoje = sheet
+            elif "ONTEM" in sheet.upper():
+                aba_ontem = sheet
+        
+        if not aba_ontem or not aba_hoje:
+            raise ValueError("Abas de origem ou destino não encontradas")
+        
+        atualizar_progresso("Excel: Copiando", "Copiando dados do intervalo K5:R14...", 50)
+        
+        # Copia os dados
+        for row in range(5, 15):  # Linhas 5 a 14
+            for col in range(11, 18):  # Colunas K a R (11 a 17)
+                valor = wb[aba_ontem][f"{get_column_letter(col)}{row}"].value
+                wb[aba_hoje][f"{get_column_letter(col)}{row}"].value = valor
+        
+        atualizar_progresso("Excel: Concluído", "Intervalo copiado com sucesso!", 100)
+        time.sleep(0.5)
+        fechar_progresso()
+        
+        mostrar_alerta_visual("Excel", "Intervalo K5:R14 copiado com sucesso", tipo="success")
+        
+    except Exception as e:
+        fechar_progresso()
+        mostrar_alerta_visual("Erro Excel", f"Erro ao copiar intervalo: {str(e)}", tipo="error")
+        raise
 
 
 def formatar_coluna_o_em_vermelho(wb, data_referencia):
-    mostrar_alerta_visual("Formatando coluna O", "Aplicando formatação vermelha...", tipo="info")
-    
-    dia_anterior = data_referencia - timedelta(days=1)
-    nome_aba = f"Dia {dia_anterior.day:02d}"
-    
-    mostrar_alerta_visual("Validando aba", f"Formatando: {nome_aba}", tipo="dev")
-    
-    if nome_aba not in wb.sheetnames:
-        mostrar_alerta_visual("Erro: Aba não encontrada", f"Aba '{nome_aba}' não existe", tipo="error")
-        raise ValueError(f"Aba '{nome_aba}' não encontrada no arquivo.")
-
-    aba = wb[nome_aba]
-    celulas_formatadas = 0
-    
-    for row in range(5, 15):
-        cell = aba.cell(row=row, column=15)
-        if cell.value is not None:
-            cell.font = Font(color="FF0000")
-            celulas_formatadas += 1
-    
-    print(
-        f"[Formato] Células O5:O14 formatadas com fonte vermelha na aba '{nome_aba}'."
-    )
-    mostrar_alerta_visual("Formatação concluída", f"{celulas_formatadas} células formatadas em vermelho", tipo="success")
+    """Formata a coluna O da aba de hoje em vermelho"""
+    try:
+        atualizar_progresso("Excel: Formatando", "Aplicando formatação vermelha...", 30)
+        
+        # Encontra a aba
+        aba_hoje = None
+        for sheet in wb.sheetnames:
+            if data_referencia in sheet:
+                aba_hoje = sheet
+                break
+        
+        if not aba_hoje:
+            raise ValueError("Aba de destino não encontrada")
+        
+        # Aplica formatação vermelha na coluna O
+        fill_vermelho = PatternFill(start_color="FFFF0000", end_color="FFFF0000", fill_type="solid")
+        
+        for row in range(1, 100):  # Aplica até linha 100
+            cell = wb[aba_hoje][f"O{row}"]
+            cell.fill = fill_vermelho
+        
+        atualizar_progresso("Excel: Concluído", "Formatação aplicada com sucesso!", 100)
+        time.sleep(0.5)
+        fechar_progresso()
+        
+        mostrar_alerta_visual("Excel", "Coluna O formatada em vermelho", tipo="success")
+        
+    except Exception as e:
+        fechar_progresso()
+        mostrar_alerta_visual("Erro Excel", f"Erro ao formatar coluna: {str(e)}", tipo="error")
+        raise
 
 
 def inserir_valor_planilha(wb, valor, data_referencia):

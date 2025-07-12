@@ -7,7 +7,7 @@ import tkinter as tk
 # Adiciona o diretório raiz do projeto ao path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 
 
 def test_alertas_basicos():

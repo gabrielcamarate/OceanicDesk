@@ -44,6 +44,7 @@ alert_positions = []
 max_alerts = 3
 active_alerts = 0
 alert_lock = threading.Lock()
+progress_alert = None  # Referência para alerta de progresso ativo
 
 def mostrar_alerta_visual(titulo, descricao, tipo='info', tempo=3000, opacidade=0.92, posicao=None):
     """
@@ -58,9 +59,25 @@ def mostrar_alerta_visual(titulo, descricao, tipo='info', tempo=3000, opacidade=
         posicao: Posição específica (None para automático)
     """
     def _show():
-        global active_alerts
+        global active_alerts, progress_alert
         
         with alert_lock:
+            # Se há um alerta de progresso ativo, atualiza ele em vez de criar novo
+            if progress_alert and hasattr(progress_alert, '_exists') and progress_alert._exists:
+                if tipo == 'progress':
+                    # Atualiza alerta de progresso existente
+                    try:
+                        progress_alert.update_progress(titulo, descricao, 0)
+                        return
+                    except:
+                        pass
+                else:
+                    # Fecha alerta de progresso antes de mostrar novo
+                    try:
+                        progress_alert.close()
+                    except:
+                        pass
+            
             if active_alerts >= max_alerts:
                 return  # Limita alertas simultâneos
             active_alerts += 1
@@ -78,13 +95,17 @@ def mostrar_alerta_visual(titulo, descricao, tipo='info', tempo=3000, opacidade=
             altura = 70
             
             if posicao is None:
-                # Posicionamento no canto inferior direito
+                # Posicionamento no canto inferior direito com controle de sobreposição
                 x = root.winfo_screenwidth() - largura - 20
-                y = root.winfo_screenheight() - altura - 20 - (len(alert_positions) * (altura + 10))
                 
-                # Limita o número de alertas simultâneos
-                if len(alert_positions) >= max_alerts:
-                    y = root.winfo_screenheight() - altura - 20 - ((len(alert_positions) % max_alerts) * (altura + 10))
+                # Calcula Y baseado em alertas ativos, evitando sobreposição
+                y_base = root.winfo_screenheight() - altura - 20
+                y_offset = len(alert_positions) * (altura + 10)
+                y = y_base - y_offset
+                
+                # Garante que não fique fora da tela
+                if y < 20:
+                    y = 20
                 
                 alert_positions.append((x, y))
             else:
@@ -171,9 +192,14 @@ def mostrar_alerta_progresso(titulo, descricao, progresso=0):
     Exibe um alerta de progresso com barra de progresso.
     """
     def _show():
-        global active_alerts
+        global active_alerts, progress_alert
         
         with alert_lock:
+            # Se já há um alerta de progresso, atualiza ele
+            if progress_alert and hasattr(progress_alert, '_exists') and progress_alert._exists:
+                progress_alert.update_progress(titulo, descricao, progresso)
+                return
+            
             if active_alerts >= max_alerts:
                 return
             active_alerts += 1
@@ -242,6 +268,35 @@ def mostrar_alerta_progresso(titulo, descricao, progresso=0):
                     pass
             
             threading.Thread(target=manter_topmost, daemon=True).start()
+            
+            # Adiciona métodos para atualização
+            def update_progress(novo_titulo, nova_descricao, novo_progresso):
+                try:
+                    label_titulo.config(text=novo_titulo)
+                    label_desc.config(text=nova_descricao)
+                    progress_bar['value'] = novo_progresso
+                    root.update()
+                except:
+                    pass
+            
+            def close():
+                try:
+                    root._exists = False
+                    with alert_lock:
+                        global active_alerts
+                        active_alerts = max(0, active_alerts - 1)
+                    root.destroy()
+                except:
+                    pass
+            
+            # Adiciona métodos ao root
+            root.update_progress = update_progress
+            root.close = close
+            root._exists = True
+            
+            # Salva referência global
+            progress_alert = root
+            
             root.mainloop()
             
         except Exception as e:
@@ -251,4 +306,31 @@ def mostrar_alerta_progresso(titulo, descricao, progresso=0):
     if threading.current_thread() is threading.main_thread():
         threading.Thread(target=_show, daemon=True).start()
     else:
-        _show() 
+        _show()
+
+def atualizar_progresso(titulo, descricao, progresso):
+    """
+    Atualiza o alerta de progresso ativo ou cria um novo.
+    """
+    global progress_alert
+    
+    if progress_alert and hasattr(progress_alert, '_exists') and progress_alert._exists:
+        try:
+            progress_alert.update_progress(titulo, descricao, progresso)
+        except:
+            mostrar_alerta_progresso(titulo, descricao, progresso)
+    else:
+        mostrar_alerta_progresso(titulo, descricao, progresso)
+
+def fechar_progresso():
+    """
+    Fecha o alerta de progresso ativo.
+    """
+    global progress_alert
+    
+    if progress_alert and hasattr(progress_alert, '_exists') and progress_alert._exists:
+        try:
+            progress_alert.close()
+            progress_alert = None
+        except:
+            pass 

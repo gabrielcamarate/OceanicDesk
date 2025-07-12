@@ -3,7 +3,7 @@ import re
 import pyautogui
 import time
 import os
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def carregar_tmp_excel():

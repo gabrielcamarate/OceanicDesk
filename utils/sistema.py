@@ -12,7 +12,7 @@ from utils.extratores import salvar_planilha_emsys
 from utils.file_utils import corrigir_cache_excel_com
 from utils.helpers import esperar_elemento
 from utils.path_utils import get_captura_path, get_system_path, get_desktop_path
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 import pygetwindow as gw
 from dotenv import load_dotenv
 load_dotenv()

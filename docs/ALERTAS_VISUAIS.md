@@ -58,7 +58,7 @@ O sistema de alertas visuais do OceanicDesk fornece feedback visual em tempo rea
 
 ### Função Principal
 ```python
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 mostrar_alerta_visual(
     titulo="Título do Alerta",
@@ -72,13 +72,24 @@ mostrar_alerta_visual(
 
 ### Função de Progresso
 ```python
-from utils.alerta_visual import mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_progresso
 
 mostrar_alerta_progresso(
     titulo="Processando...",
     descricao="Etapa 1 de 5",
     progresso=20          # Percentual (0-100)
 )
+```
+
+### Funções de Progresso Dinâmico
+```python
+from interfaces.alerta_visual import atualizar_progresso, fechar_progresso
+
+# Atualiza progresso existente ou cria novo
+atualizar_progresso("Título", "Descrição", 50)
+
+# Fecha alerta de progresso ativo
+fechar_progresso()
 ```
 
 ## 📍 Posicionamento
@@ -128,17 +139,17 @@ BORDER_COLORS = {
 
 ## 🐛 Problemas Conhecidos
 
-### 1. **Sobreposição Visual**
+### 1. **Sobreposição Visual** ✅ RESOLVIDO
 - **Descrição**: Alertas de sucesso podem sobrepor alertas de erro
 - **Cenário**: Múltiplos alertas simultâneos (ex: COM errors)
-- **Status**: Identificado, em análise
+- **Status**: Corrigido com sistema de progresso dinâmico
 
-### 2. **Janela Oculta**
+### 2. **Janela Oculta** ✅ RESOLVIDO
 - **Descrição**: Janela principal fica oculta para não interferir
 - **Solução**: Implementada com `root.withdraw()`
 - **Status**: Resolvido
 
-### 3. **Threads Excessivas**
+### 3. **Threads Excessivas** ✅ RESOLVIDO
 - **Descrição**: Exceções de threads no terminal
 - **Solução**: Sistema thread-safe implementado
 - **Status**: Resolvido
@@ -148,6 +159,7 @@ BORDER_COLORS = {
 ### Executar Testes
 ```bash
 python tests/test_alerta_visual.py
+python tests/test_progresso_dinamico.py
 ```
 
 ### Testes Disponíveis
@@ -158,11 +170,12 @@ python tests/test_alerta_visual.py
 5. **Posicionamento**: Teste de posições
 6. **Threads**: Teste de concorrência
 7. **Bug Sobreposição**: Simulação do bug visual
+8. **Progresso Dinâmico**: Teste de atualização em tempo real
 
 ## 📋 Integração no Projeto
 
 ### Arquivos Principais
-- `utils/alerta_visual.py`: Módulo principal
+- `interfaces/alerta_visual.py`: Módulo principal (movido de utils/)
 - `run.py`: Inicialização e janela oculta
 - `controllers/app_controller.py`: Alertas nas etapas
 - `utils/etapas.py`: Alertas detalhados
@@ -172,8 +185,8 @@ python tests/test_alerta_visual.py
 # Início de operação
 mostrar_alerta_visual("Iniciando", "Operação em andamento...", tipo="info")
 
-# Progresso
-mostrar_alerta_visual("Processando", "Etapa intermediária...", tipo="progress")
+# Progresso dinâmico (recomendado para operações longas)
+atualizar_progresso("Processando", "Etapa intermediária...", 50)
 
 # Sucesso
 mostrar_alerta_visual("Concluído", "Operação finalizada!", tipo="success")
@@ -187,14 +200,21 @@ mostrar_alerta_visual("Debug", "Variável X = 42", tipo="dev")
 
 ## 🔄 Histórico de Versões
 
-### v1.4.5 (Atual)
+### v1.4.7 (Atual)
+- ✅ Sistema de progresso dinâmico implementado
+- ✅ Bug de sobreposição corrigido
+- ✅ Movido para `interfaces/` para melhor modularização
+- ✅ Funções `atualizar_progresso()` e `fechar_progresso()`
+- ✅ Testes avançados de progresso dinâmico
+
+### v1.4.6
 - ✅ Posicionamento no canto inferior direito
 - ✅ Sistema thread-safe
 - ✅ Controle de alertas simultâneos
 - ✅ Janela principal oculta
 - ✅ Otimização de performance
 
-### v1.4.4
+### v1.4.5
 - ✅ Sistema de alertas implementado
 - ✅ Múltiplos tipos de alerta
 - ✅ Integração completa no projeto
@@ -202,11 +222,10 @@ mostrar_alerta_visual("Debug", "Variável X = 42", tipo="dev")
 ## 🎯 Melhorias Futuras
 
 ### Planejadas
-- [ ] Correção do bug de sobreposição
-- [ ] Sistema de prioridade de alertas
-- [ ] Alertas persistentes (não desaparecem)
 - [ ] Som de notificação
 - [ ] Animações mais suaves
+- [ ] Alertas persistentes (não desaparecem)
+- [ ] Sistema de prioridade de alertas
 
 ### Sugestões
 - [ ] Alertas agrupados por categoria
@@ -224,5 +243,5 @@ Para dúvidas ou problemas com o sistema de alertas:
 
 ---
 
-**Desenvolvido para OceanicDesk v1.4.5**
+**Desenvolvido para OceanicDesk v1.4.7**
 *Sistema de alertas visuais moderno e responsivo* 

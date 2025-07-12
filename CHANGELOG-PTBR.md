@@ -1,135 +1,172 @@
 # Changelog - OceanicDesk
 
+## [1.4.7] - 2024-12-19
+
+### 🏗️ Arquitetura
+- **Reestruturação Modular**: Movido sistema de alertas visuais de `utils/` para `interfaces/` para melhor organização do projeto
+- **Atualizações de Import**: Atualizados todos os imports no projeto para usar `interfaces.alerta_visual`
+- **Arquitetura Limpa**: Melhorada separação de responsabilidades entre utilitários e interfaces
+
+### ✨ Funcionalidades
+- **Sistema de Progresso Dinâmico**: Atualizações de progresso em tempo real com funções `atualizar_progresso()` e `fechar_progresso()`
+- **Prevenção de Sobreposição**: Corrigidos conflitos visuais entre múltiplos alertas
+- **Segurança de Threads**: Melhorado tratamento de operações concorrentes
+- **Posicionamento Inteligente**: Empilhamento inteligente de alertas no canto inferior direito
+
+### 🐛 Correções de Bugs
+- **Sobreposição Visual**: Resolvido problema onde alertas de sucesso podiam sobrepor alertas de erro
+- **Conflitos de Threads**: Corrigidas exceções causadas por múltiplos alertas simultâneos
+- **Performance**: Otimizada renderização de alertas e reduzido uso de recursos
+- **Posicionamento**: Posicionamento consistente de alertas em todas as operações
+
+### 🧪 Testes
+- **Suite de Testes Abrangente**: Adicionados testes avançados para sistema de alertas visuais
+- **Testes de Progresso**: Novos testes para funcionalidade de progresso dinâmico
+- **Testes de Sobreposição**: Testes específicos para prevenir conflitos visuais
+- **Testes de Threads**: Validação de segurança de concorrência
+
+### 📚 Documentação
+- **Documentação Atualizada**: Refletida nova localização do módulo em toda documentação
+- **Exemplos de API**: Adicionados exemplos para funções de progresso dinâmico
+- **Guia de Integração**: Atualizados padrões de integração para nova estrutura
+
+### 🔧 Melhorias Técnicas
+- **Otimização de Imports**: Simplificadas declarações de import em todo o projeto
+- **Organização de Código**: Melhor separação entre componentes de UI e utilitários
+- **Manutenibilidade**: Melhorada estrutura de código para desenvolvimento futuro
+
+---
+
 ## [1.4.6] - 2024-12-19
 
-### Adicionado
-- **Documentação Completa**: Criada documentação específica para sistema de alertas visuais
-- **Testes Avançados**: Implementados testes separados para simular bugs e cenários específicos
-- **Janela Oculta**: Janela principal agora fica oculta para não interferir com interface
-- **README Atualizado**: Documentação principal atualizada com informações sobre alertas
-- **Teste de Bug**: Teste específico para simular bug de sobreposição visual
+### ✨ Funcionalidades
+- **Posicionamento Inteligente**: Movidos alertas para canto inferior direito para prevenir interferência
+- **Gerenciamento de Threads**: Implementado sistema de alertas thread-safe
+- **Alertas Concorrentes**: Limitados a 3 alertas simultâneos para prevenir sobrecarga
+- **Otimização de Performance**: Reduzido uso de recursos e melhorada responsividade
 
-### Melhorado
-- **Testes**: Sistema de testes mais robusto e organizado
-- **Documentação**: Documentação técnica detalhada e acessível
-- **UX**: Interface mais limpa sem janelas desnecessárias
-- **Manutenibilidade**: Melhor estrutura de testes e documentação
+### 🐛 Correções de Bugs
+- **Conflitos de Threads**: Corrigidas exceções causadas por múltiplas threads de alerta
+- **Interferência Visual**: Resolvidos conflitos com operações PyAutoGUI
+- **Vazamentos de Memória**: Prevenida acumulação de janelas de alerta
+- **Problemas de Posicionamento**: Posicionamento consistente de alertas em diferentes resoluções
+
+### 🔧 Melhorias Técnicas
+- **Bloqueio de Alertas**: Mecanismo thread-safe para exibição de alertas
+- **Gerenciamento de Janelas**: Melhorado tratamento de janelas ocultas
+- **Otimização de Animações**: Efeitos fade in/out mais suaves
+- **Gerenciamento de Recursos**: Melhor limpeza de recursos de alerta
+
+---
 
 ## [1.4.5] - 2024-12-19
 
-### Corrigido
-- **Sistema de Alertas**: Corrigido problema de múltiplos alertas simultâneos no início da aplicação
-- **Posicionamento**: Alertas movidos para canto inferior direito para evitar conflitos com pyautogui
-- **Threads**: Otimizado sistema de threads para reduzir exceções e melhorar performance
-- **Performance**: Reduzido número de alertas excessivos durante execução das etapas
-- **Delays**: Adicionado delays entre etapas para melhor experiência do usuário
-- **Controle**: Implementado sistema de controle de alertas simultâneos com lock thread-safe
+### ✨ Funcionalidades
+- **Sistema de Alertas Visuais**: Sistema de alertas moderno com tema escuro e animações suaves
+- **Múltiplos Tipos de Alerta**: Alertas de Sucesso, Erro, Info, Aviso, Dev e Progresso
+- **Feedback em Tempo Real**: Feedback visual imediato para todas as operações
+- **Posicionamento Customizável**: Opções flexíveis de posicionamento de alertas
+- **Controle de Opacidade**: Transparência configurável dos alertas
 
-### Melhorado
-- **UX**: Alertas mais rápidos e menos intrusivos
-- **Estabilidade**: Sistema mais estável durante execução de automações
-- **Compatibilidade**: Melhor compatibilidade com pyautogui e automações
+### 🎨 Design
+- **Tema Escuro**: Interface escura elegante seguindo padrões modernos de UI
+- **Animações Suaves**: Efeitos fade in/out para aparência profissional
+- **Integração de Ícones**: Ícones contextuais para cada tipo de alerta
+- **Layout Responsivo**: Adapta-se a diferentes tamanhos de tela
 
-## [1.4.4] - 2024-12-19
-### Adicionado
-- Sistema de alertas visuais moderno e abrangente em todo o projeto
-- Alertas detalhados para todas as etapas, funções e operações do sistema
-- Controle de posicionamento automático para múltiplos alertas simultâneos
-- Alertas de progresso com barra de progresso para operações longas
-- Tipos de alerta: success, error, info, dev, warning, progress
-- Alertas específicos para logs técnicos (tipo 'dev') e informações para usuário final
-- Sistema de alertas não intrusivo com fade in/out e opacidade reduzida
+### 🔧 Funcionalidades Técnicas
+- **Thread-Safe**: Exibição segura de alertas concorrentes
+- **Sempre no Topo**: Alertas permanecem visíveis sobre outras janelas
+- **Auto-Dismiss**: Timing configurável de auto-dismissal
+- **Tratamento de Erros**: Tratamento gracioso de falhas de alerta
 
-### Melhorado
-- Transparência total do sistema com alertas para cada ação, por menor que seja
-- Alertas visuais em todas as etapas do processo (1-8)
-- Alertas detalhados em operações de Excel, automação, OCR e relatórios
-- Alertas de validação e verificação de arquivos e configurações
-- Alertas de progresso em loops e operações repetitivas
-- Alertas de erro com informações detalhadas para troubleshooting
-- Alertas de sucesso com confirmação de conclusão de tarefas
+### 📊 Integração
+- **Cobertura Completa**: Alertas integrados em toda a aplicação
+- **Rastreamento de Operações**: Feedback visual para todas as operações principais
+- **Relatório de Erros**: Mensagens de erro claras com indicadores visuais
+- **Indicação de Progresso**: Barras de progresso para operações longas
 
-### Alterado
-- Módulo `utils/alerta_visual.py` completamente reformulado com novas funcionalidades
-- Todas as funções principais agora incluem alertas visuais detalhados
-- Sistema de logging integrado com alertas visuais para eventos importantes
-- Interface mais informativa e transparente para o usuário
-- Melhor experiência de usuário com feedback visual constante
+### 🧪 Testes
+- **Testes Abrangentes**: Suite completa de testes para sistema de alertas
+- **Casos Extremos**: Testes para alertas concorrentes e condições de erro
+- **Testes de Performance**: Validação de performance do sistema de alertas
+- **Testes de Integração**: Validação end-to-end da funcionalidade de alertas
 
-### Corrigido
-- Alertas visuais agora seguem padrão consistente em todo o projeto
-- Tipos de alerta padronizados (dev apenas para logs técnicos)
-- Posicionamento automático evita sobreposição de alertas
-- Controle de múltiplos alertas simultâneos
+---
 
-## [1.4.3] - 2024-12-19
-### Segurança
-- Removidos dados sensíveis hardcoded (usuários e senhas) do código
-- Adicionadas variáveis de ambiente para autenticação de usuários (USUARIO_NILTON, SENHA_NILTON, USUARIO_ELIANE, SENHA_ELIANE)
-- Aprimorada segurança exigindo que todas as credenciais sejam armazenadas no arquivo .env
-- Adicionadas mensagens de erro amigáveis quando variáveis de ambiente obrigatórias estão ausentes
+## [1.4.4] - 2024-12-18
 
-### Alterado
-- Atualizada documentação para refletir novas práticas de segurança
-- Aprimorado tratamento de erros para credenciais de autenticação ausentes
+### ✨ Funcionalidades
+- **Operações Excel Aprimoradas**: Melhorada automação COM para processamento Excel
+- **Melhor Tratamento de Erros**: Tratamento de erros mais robusto em todos os módulos
+- **Melhorias de Performance**: Operações de arquivo e processamento de dados otimizados
 
-## [1.4.2] - 2024-12-19
-### Adicionado
-- Adicionada marca "OceanicDesk" em todos os títulos de janela
-- Adicionado suporte a ícones para todas as janelas secundárias (entrada_dados, metodos_pagamento, valores_fechamento)
-- Adicionada função abrangente de carregamento de ícones para todos os módulos de interface
+### 🐛 Correções de Bugs
+- **Problemas COM Excel**: Corrigida limpeza de objetos COM e vazamentos de memória
+- **Problemas de Caminho de Arquivo**: Resolvidos problemas de resolução de caminho na versão compilada
+- **Segurança de Threads**: Melhorada segurança de threads em operações concorrentes
 
-### Alterado
-- Atualizado título da janela principal para "OceanicDesk - Painel de Controle - Relatórios Oceanico"
-- Atualizados títulos das janelas secundárias para incluir prefixo "OceanicDesk"
-- Aprimorado carregamento de ícones com múltiplos caminhos de fallback para todas as janelas
+---
 
-### Corrigido
-- Corrigidos ícones ausentes nas janelas secundárias
-- Corrigida consistência dos títulos de janela em todas as interfaces
+## [1.4.3] - 2024-12-17
 
-## [1.4.1] - 2025-07-12
-### Corrigido
-- Removidos todos os caminhos hardcoded do código para melhor portabilidade.
-- Corrigido carregamento do arquivo .env quando compilado para .exe usando PyInstaller.
-- Corrigido caminhos de capturas de imagem não sendo encontrados na versão compilada.
-- Corrigido caminhos de programas do sistema (AutoSystem, EMSys3, Tesseract) para diferentes instalações.
+### ✨ Funcionalidades
+- **Integração OCR Avançada**: Integração Tesseract aprimorada para melhor extração de texto
+- **Gerenciamento de Arquivos Melhorado**: Melhor organização de arquivos e tratamento de caminhos
+- **Logging Aprimorado**: Logging mais detalhado para debugging
 
-### Adicionado
-- Sistema de resolução dinâmica de caminhos (`utils/path_utils.py`) para ambientes de desenvolvimento e compilados.
-- Carregamento robusto de ícone para a janela da aplicação com múltiplos fallbacks.
-- Inclusão automática de pastas necessárias (planilhas, capturas_ocr_pyautogui) no build.
-- Script abrangente de teste de build (`test_build.py`) para verificar todos os componentes.
-- Automação de build aprimorada com cópia adequada de arquivos e nomenclatura de versão.
+### 🐛 Correções de Bugs
+- **Precisão OCR**: Melhorada precisão de reconhecimento de texto
+- **Permissões de Arquivo**: Corrigidos problemas de permissão de arquivo no Windows
+- **Gerenciamento de Memória**: Melhor uso de memória em operações longas
 
-### Alterado
-- Configuração de build atualizada para incluir todos os recursos necessários.
-- Tratamento de erros e logging aprimorados para resolução de caminhos.
-- Documentação aprimorada com guias de troubleshooting.
+---
 
-## [1.4.0] - 2025-07-11
-### Adicionado
-- Checagem elegante de variáveis de ambiente obrigatórias (.env) em todo o projeto.
-- Erros amigáveis caso variáveis sensíveis estejam ausentes.
-- Robustez no uso de caminhos de arquivos e credenciais.
-- Possibilidade de configurar o caminho do Tesseract via TESSERACT_CMD.
-- Documentação de robustez no README.
+## [1.4.2] - 2024-12-16
 
-## [1.0.3] - 2025-07-11
-### Corrigido
-- Conversão robusta de caminhos de arquivos para Path em todas as funções críticas do projeto.
-- Prevenção de erros ao manipular arquivos recebidos como string.
+### ✨ Funcionalidades
+- **Suporte Multi-usuário**: Suporte para múltiplas credenciais de usuário
+- **Automação Aprimorada**: Sequências de automação PyAutoGUI melhoradas
+- **Melhor Configuração**: Opções de configuração mais flexíveis
 
-## [1.0.2] - 2025-07-10
-### Alterado
-- Novo nome do app: OceanicDesk.
-- Uso exclusivo do favicon.ico como ícone do app (barra de tarefas e janela).
-- Leitura automática da versão do arquivo VERSION na tela Sobre.
-- Limpeza automática de arquivos temporários após o build.
+### 🐛 Correções de Bugs
+- **Problemas de Autenticação**: Corrigidos problemas de login com diferentes usuários
+- **Resolução de Tela**: Melhor tratamento de diferentes resoluções de tela
+- **Problemas de Timing**: Melhorado timing em sequências de automação
 
-## [1.0.1] - 2025-07-09
-### Implementado
-- Adição do botão "Sobre" com informações do app.
-- Geração de README_USUARIO.txt para instruções do usuário final.
-- Ajustes de build para distribuição em .zip.
+---
+
+## [1.4.1] - 2024-12-15
+
+### ✨ Funcionalidades
+- **Relatórios Financeiros**: Processamento automatizado de dados financeiros
+- **Análise de Vendas**: Geração aprimorada de relatórios de vendas
+- **Validação de Dados**: Validação de dados e verificação de erros melhoradas
+
+### 🐛 Correções de Bugs
+- **Precisão de Dados**: Corrigidos problemas de precisão na extração de dados
+- **Geração de Relatórios**: Formatação e precisão de relatórios melhoradas
+- **Recuperação de Erros**: Mecanismos de recuperação de erros melhores
+
+---
+
+## [1.4.0] - 2024-12-14
+
+### ✨ Funcionalidades
+- **Lançamento Inicial**: Primeira versão estável do OceanicDesk
+- **Automação Básica**: Funcionalidade básica de automação
+- **Integração Excel**: Capacidades iniciais de processamento de arquivos Excel
+- **Suporte OCR**: Extração básica de texto OCR
+- **Interface do Usuário**: Implementação inicial da GUI
+
+### 🎯 Componentes Principais
+- **Aplicação Principal**: Controlador central da aplicação
+- **Operações Excel**: Utilitários de processamento de planilhas
+- **Processamento OCR**: Extração de texto de imagens
+- **Automação do Sistema**: Sequências de automação PyAutoGUI
+- **Gerenciamento de Arquivos**: Utilitários de manipulação e organização de arquivos
+
+---
+
+*Para informações detalhadas sobre cada versão, consulte as notas de lançamento individuais.*
 

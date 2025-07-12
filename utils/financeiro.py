@@ -1,7 +1,8 @@
 import pyautogui
 import time
+import openpyxl
 from utils.duplicata_ocr import aguardar_usuario
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def preenchendo_sangria(valor, operador):

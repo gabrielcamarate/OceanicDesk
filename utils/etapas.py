@@ -42,7 +42,8 @@ from utils.automacao import extrair_valor_tmp, acessar_fechamento_caixa
 from utils.automacao import acessar_fechamento_caixa, automatizar_fechamento_caixa
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso, atualizar_progresso, fechar_progresso
+import time
 load_dotenv()
 
 # Global modificável se planilha for definida externamente
@@ -202,11 +203,17 @@ def etapa8_projecao_de_vendas() -> None:
     ontem = hoje - timedelta(days=1)
     ontem = ontem.day
     
+    # Inicia alerta de progresso
+    atualizar_progresso("Etapa 8: Iniciando", "Configurando período de análise...", 10)
+    
     # Processo comentado - descomente conforme necessário
+    # atualizar_progresso("Etapa 8: Planilhas", "Atualizando planilhas de projeção...", 20)
     # atualizando_planilhas_projecao()
+    
+    # atualizar_progresso("Etapa 8: Sistema", "Conectando ao Meu Controle...", 30)
     # acessar_relatorio_subcategoria()
     
-    # Relatórios específicos
+    # Relatórios específicos com progresso dinâmico
     relatorios = [
         ("Combustíveis", lambda: relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)),
         ("Bebidas não alcoólicas", lambda: relatorio_bebida_nao_alcoolica(ontem)),
@@ -217,14 +224,20 @@ def etapa8_projecao_de_vendas() -> None:
         ("Isqueiros", lambda: relatorio_isqueiros(ontem))
     ]
     
+    # Progresso dinâmico para relatórios (comentado por enquanto)
     # for i, (nome, funcao) in enumerate(relatorios):
-    #     progresso = int((i / len(relatorios)) * 100)
-    #     mostrar_alerta_progresso(f"Processando {nome}", f"Relatório {i+1} de {len(relatorios)}", progresso)
-        # funcao()  # Descomente conforme necessário
+    #     progresso = 40 + int((i / len(relatorios)) * 40)  # 40% a 80%
+    #     atualizar_progresso(f"Etapa 8: {nome}", f"Processando relatório {i+1} de {len(relatorios)}", progresso)
+    #     funcao()  # Descomente conforme necessário
+    #     time.sleep(0.5)
     
     # Posto Chacaltaya - único alerta durante pyautogui
-    mostrar_alerta_visual("Processando Chacaltaya", "Atualizando dados do posto...", tipo="info")
+    atualizar_progresso("Etapa 8: Chacaltaya", "Atualizando dados do posto...", 90)
     posto_chacaltaya()
+    
+    atualizar_progresso("Etapa 8: Concluída", "Projeção de vendas finalizada!", 100)
+    time.sleep(1)
+    fechar_progresso()
     
     mostrar_alerta_visual("Etapa 8 Concluída", "Projeção de vendas finalizada com sucesso!", tipo="success")
     messagebox.showinfo("Etapa 8", "Relatórios atualizados com sucesso!")
