@@ -11,6 +11,7 @@ from utils.relatorios.food import atualizar_meu_controle
 from utils.extratores import salvar_planilha_emsys
 from utils.file_utils import corrigir_cache_excel_com
 from utils.helpers import esperar_elemento
+from utils.path_utils import get_captura_path, get_system_path, get_desktop_path
 import pygetwindow as gw
 
 def mostrar_area_de_trabalho():
@@ -28,11 +29,11 @@ def mostrar_area_de_trabalho():
 
 
 def abrir_auto_system():
-    caminho_app = r"c:\ProgramData\Microsoft\Windows\Start Menu\Programs\AutoSystem\AutoSystem - Gerencial.lnk"
+    caminho_app = get_system_path("autosystem")
     mostrar_area_de_trabalho()
     os.startfile(caminho_app)
     logger.info("Abrindo AutoSystem...")
-    esperar_elemento(r"C:\Users\Usuario\Desktop\Gabriel Camarate\Projeto_posto\capturas_ocr_pyautogui\autosystem_login.png", timeout=60)
+    esperar_elemento(get_captura_path("autosystem_login.png"), timeout=60)
 
 
 def fazer_login(usuario: str, senha: str):
@@ -41,7 +42,7 @@ def fazer_login(usuario: str, senha: str):
     pyautogui.press("tab")
     pyautogui.write(senha, interval=0.1)
     pyautogui.press("enter")
-    esperar_elemento(r"C:\Users\Usuario\Desktop\Gabriel Camarate\Projeto_posto\capturas_ocr_pyautogui\autosystem_remove_alert.png", timeout=60)
+    esperar_elemento(get_captura_path("autosystem_remove_alert.png"), timeout=60)
     pyautogui.moveTo(1095, 13)
     pyautogui.click()
 
@@ -108,7 +109,7 @@ def exportar_relatorio_excel():
     time.sleep(2)
     pyautogui.hotkey("alt", "d")
     time.sleep(0.5)
-    pyautogui.write(r"C:\Users\Usuario\Desktop")
+    pyautogui.write(get_desktop_path())
     pyautogui.press("enter")
     time.sleep(0.5)
     pyautogui.write("tmp")
@@ -181,7 +182,7 @@ def gerar_e_exportar_vendas_detalhado():
     time.sleep(2)
     pyautogui.hotkey("alt", "d")
     time.sleep(0.5)
-    pyautogui.write(r"C:\Users\Usuario\Desktop")
+    pyautogui.write(get_desktop_path())
     pyautogui.press("enter")
     time.sleep(1.5)
     pyautogui.write("tmp")
@@ -205,8 +206,8 @@ def auto_system_relatorio_litro_e_desconto():
 def abrir_emsys3():
     logger.info("Abrindo EMSys3...")
     mostrar_area_de_trabalho()
-    os.startfile(r"c:\Rezende\EMSys3\EMSys3.exe")
-    esperar_elemento(r"C:\Users\Usuario\Desktop\Gabriel Camarate\Projeto_posto\capturas_ocr_pyautogui\emsys_login.png", timeout=60)
+    os.startfile(get_system_path("emsys3"))
+    esperar_elemento(get_captura_path("emsys_login.png"), timeout=60)
 
 
 def login_emsys3():
@@ -219,7 +220,7 @@ def login_emsys3():
     time.sleep(0.5)
     pyautogui.write("123")
     pyautogui.press("enter")
-    esperar_elemento(r"C:\Users\Usuario\Desktop\Gabriel Camarate\Projeto_posto\capturas_ocr_pyautogui\emsys_alert.png", timeout=60)
+    esperar_elemento(get_captura_path("emsys_alert.png"), timeout=60)
 
 
 def acessar_relatorio_pix():
@@ -476,19 +477,19 @@ def posto_chacaltaya():
     ontem = hoje - timedelta(days=1)
     ontem = ontem.day
     
-    pyautogui.click(83,44)    
-    pyautogui.click(29,81, duration=0.2) 
-    time.sleep(8)
-    pyautogui.click(29,81, duration=0.2) 
-    time.sleep(6)
-    pyautogui.press("tab")
-    pyautogui.write("ELIANE.MARIA")
-    pyautogui.press("tab")
-    pyautogui.write("220508")
-    pyautogui.press("enter")
-    time.sleep(30)
-    pyautogui.click(155,38)
-    time.sleep(15)
+    # pyautogui.click(83,44)    
+    # pyautogui.click(29,81, duration=0.2) 
+    # time.sleep(8)
+    # pyautogui.click(29,81, duration=0.2) 
+    # time.sleep(6)
+    # pyautogui.press("tab")
+    # pyautogui.write("ELIANE.MARIA")
+    # pyautogui.press("tab")
+    # pyautogui.write("220508")
+    # pyautogui.press("enter")
+    # time.sleep(30)
+    # pyautogui.click(155,38)
+    time.sleep(3)
     acessar_relatorio_subcategoria()
     relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem, chacal=True)
     relatorio_bebida_nao_alcoolica(ontem, chacal=True)

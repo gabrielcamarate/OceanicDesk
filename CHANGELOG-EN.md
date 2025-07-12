@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.4.1] - 2025-07-12
+### Fixed
+- Removed all hardcoded paths from the codebase for better portability.
+- Fixed .env file loading when compiled to .exe using PyInstaller.
+- Fixed image capture paths not being found in compiled version.
+- Fixed system program paths (AutoSystem, EMSys3, Tesseract) for different installations.
+
+### Added
+- Dynamic path resolution system (`utils/path_utils.py`) for development and compiled environments.
+- Robust icon loading for the application window with multiple fallbacks.
+- Automatic inclusion of required folders (planilhas, capturas_ocr_pyautogui) in the build.
+- Comprehensive build testing script (`test_build.py`) to verify all components.
+- Enhanced build automation with proper file copying and version naming.
+
+### Changed
+- Updated build configuration to include all necessary resources.
+- Improved error handling and logging for path resolution.
+- Enhanced documentation with troubleshooting guides.
+
+## [1.4.0] - 2025-07-11
+### Added
+- Elegant checking of required environment variables (.env) throughout the project.
+- Friendly errors if sensitive variables are missing.
+- Robustness in the use of file paths and credentials.
+- Possibility to configure Tesseract path via TESSERACT_CMD.
+- Robustness documentation in README.
+
 ## [1.0.3] - 2025-07-11
 ### Fixed
 - Robust conversion of file paths to Path in all critical project functions.
@@ -14,14 +41,7 @@
 
 ## [1.0.1] - 2025-07-09
 ### Added
-- Added “About” button with app information.
+- Added "About" button with app information.
 - Generated README_USUARIO.txt for end-user instructions.
-- Build adjustments for .zip distribution. 
-## [1.4.0] - 2025-07-11
-### Added
-- Elegant checking of required environment variables (.env) throughout the project.
-- Friendly errors if sensitive variables are missing.
-- Robustness in the use of file paths and credentials.
-- Possibility to configure Tesseract path via TESSERACT_CMD.
-- Robustness documentation in README.
+- Build adjustments for .zip distribution.
 

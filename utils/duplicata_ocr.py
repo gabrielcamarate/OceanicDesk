@@ -6,12 +6,13 @@ from tkinter import messagebox, Tk
 import os
 import shutil
 from pathlib import Path
+from utils.path_utils import get_project_root, get_system_path
 
-PASTA_CAPTURAS = Path("capturas_ocr")
+PASTA_CAPTURAS = get_project_root() / "capturas_ocr"
 PASTA_CAPTURAS.mkdir(exist_ok=True)
 
-# Certifique-se de configurar corretamente o caminho do Tesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# Configura o caminho do Tesseract dinamicamente
+pytesseract.pytesseract.tesseract_cmd = get_system_path("tesseract")
 
 codigos_bandeiras = {
     "GOOCARD": 11,
@@ -86,11 +87,8 @@ def preencher_cartoes_com_duplicatas(resultados):
 
         # Salvar a imagem para conferência
 
-        path_correto = Path(
-            r"C:\Users\Usuario\Desktop\Gabriel Camarate\Projeto_posto\capturas_ocr"
-        )
         screenshot_path = (
-            path_correto / f"screenshot_cupom_{bandeira.replace(' ', '_')}.png"
+            PASTA_CAPTURAS / f"screenshot_cupom_{bandeira.replace(' ', '_')}.png"
         )
         screenshot.save(screenshot_path)
 

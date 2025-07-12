@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.4.1] - 2025-07-12
+### Corrigido
+- Removidos todos os caminhos hardcoded do código para melhor portabilidade.
+- Corrigido carregamento do arquivo .env quando compilado para .exe usando PyInstaller.
+- Corrigido caminhos de capturas de imagem não sendo encontrados na versão compilada.
+- Corrigido caminhos de programas do sistema (AutoSystem, EMSys3, Tesseract) para diferentes instalações.
+
+### Adicionado
+- Sistema de resolução dinâmica de caminhos (`utils/path_utils.py`) para ambientes de desenvolvimento e compilados.
+- Carregamento robusto de ícone para a janela da aplicação com múltiplos fallbacks.
+- Inclusão automática de pastas necessárias (planilhas, capturas_ocr_pyautogui) no build.
+- Script abrangente de teste de build (`test_build.py`) para verificar todos os componentes.
+- Automação de build aprimorada com cópia adequada de arquivos e nomenclatura de versão.
+
+### Alterado
+- Configuração de build atualizada para incluir todos os recursos necessários.
+- Tratamento de erros e logging aprimorados para resolução de caminhos.
+- Documentação aprimorada com guias de troubleshooting.
+
+## [1.4.0] - 2025-07-11
+### Adicionado
+- Checagem elegante de variáveis de ambiente obrigatórias (.env) em todo o projeto.
+- Erros amigáveis caso variáveis sensíveis estejam ausentes.
+- Robustez no uso de caminhos de arquivos e credenciais.
+- Possibilidade de configurar o caminho do Tesseract via TESSERACT_CMD.
+- Documentação de robustez no README.
+
 ## [1.0.3] - 2025-07-11
 ### Corrigido
 - Conversão robusta de caminhos de arquivos para Path em todas as funções críticas do projeto.
@@ -14,14 +41,7 @@
 
 ## [1.0.1] - 2025-07-09
 ### Implementado
-- Adição do botão “Sobre” com informações do app.
+- Adição do botão "Sobre" com informações do app.
 - Geração de README_USUARIO.txt para instruções do usuário final.
-- Ajustes de build para distribuição em .zip. 
-## [1.4.0] - 2025-07-11
-### Adicionado
-- Checagem elegante de vari�veis de ambiente obrigat�rias (.env) em todo o projeto.
-- Erros amig�veis caso vari�veis sens�veis estejam ausentes.
-- Robustez no uso de caminhos de arquivos e credenciais.
-- Possibilidade de configurar o caminho do Tesseract via TESSERACT_CMD.
-- Documenta��o de robustez no README.
+- Ajustes de build para distribuição em .zip.
 

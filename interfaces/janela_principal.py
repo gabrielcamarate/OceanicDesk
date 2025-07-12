@@ -13,24 +13,74 @@ class JanelaPrincipal:
         self.root.title("Painel de Controle - Relatórios Oceanico")
         self.root.geometry("650x600")
         self.root.configure(padx=10, pady=10)
-        try:
-            import os
-            import sys
-            if getattr(sys, 'frozen', False):
-                base_dir = os.path.dirname(sys.executable)
-            else:
-                base_dir = os.path.dirname(os.path.abspath(__file__))
-            # Caminho correto para build e dev
-            ico_path = os.path.join(base_dir, 'images', 'favicon.ico')
-            if not os.path.exists(ico_path):
-                # fallback: mesmo diretório do exe
-                ico_path = os.path.join(base_dir, 'favicon.ico')
-            if os.path.exists(ico_path):
-                self.root.iconbitmap(ico_path)
-        except Exception as e:
-            print(f"[Aviso] Não foi possível definir o ícone da janela: {e}")
+        
+        # Carrega o ícone da janela
+        self._carregar_icone()
 
         self._criar_interface()
+
+    def _carregar_icone(self):
+        """
+        Carrega o ícone da janela com múltiplas tentativas e fallbacks
+        """
+        import os
+        import sys
+        from utils.path_utils import get_image_path
+        
+        # Lista de possíveis caminhos para o ícone
+        possible_paths = []
+        
+        if getattr(sys, 'frozen', False):
+            # Se é um executável PyInstaller
+            base_dir = os.path.dirname(sys.executable)
+            possible_paths.extend([
+                os.path.join(base_dir, 'images', 'favicon.ico'),
+                os.path.join(base_dir, 'favicon.ico'),
+                os.path.join(base_dir, '..', 'images', 'favicon.ico'),
+            ])
+        else:
+            # Se é desenvolvimento
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            possible_paths.extend([
+                os.path.join(base_dir, '..', 'images', 'favicon.ico'),
+                os.path.join(base_dir, '..', 'favicon.ico'),
+                os.path.join(base_dir, 'images', 'favicon.ico'),
+            ])
+        
+        # Tenta usar a função de path_utils
+        try:
+            ico_path = get_image_path("favicon.ico")
+            if ico_path and os.path.exists(ico_path):
+                possible_paths.insert(0, ico_path)  # Coloca no início da lista
+        except Exception:
+            pass
+        
+        # Procura o primeiro ícone que existe
+        ico_loaded = False
+        for ico_path in possible_paths:
+            try:
+                if os.path.exists(ico_path):
+                    # Tenta carregar o ícone
+                    self.root.iconbitmap(ico_path)
+                    print(f"✅ Ícone carregado com sucesso: {ico_path}")
+                    ico_loaded = True
+                    break
+                else:
+                    print(f"⚠️ Ícone não encontrado: {ico_path}")
+            except Exception as e:
+                print(f"❌ Erro ao carregar ícone {ico_path}: {e}")
+                continue
+        
+        if not ico_loaded:
+            print("❌ Nenhum ícone foi carregado. Usando ícone padrão do sistema.")
+            # Tenta definir um ícone padrão do Windows
+            try:
+                if os.name == 'nt':  # Windows
+                    import ctypes
+                    myappid = 'oceanicdesk.app.1.0'  # ID único para o aplicativo
+                    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+            except Exception as e:
+                print(f"⚠️ Não foi possível definir ID do aplicativo: {e}")
 
     def _criar_interface(self):
         tk.Label(self.root, text="Painel de Etapas", font=("Arial", 12, "bold")).pack(

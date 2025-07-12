@@ -121,14 +121,14 @@ def etapa8_projecao_de_vendas() -> None:
     ontem = ontem.day
     
     
-    atualizando_planilhas_projecao()
-    acessar_relatorio_subcategoria()
-    relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)
-    relatorio_bebida_nao_alcoolica(ontem)
-    relatorio_bomboniere(ontem)
-    relatorio_cerveja(ontem)
-    relatorio_food(ontem)
-    relatorio_cigarro(ontem)
-    relatorio_isqueiros(ontem)
+    # atualizando_planilhas_projecao()
+    # acessar_relatorio_subcategoria()
+    # relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)
+    # relatorio_bebida_nao_alcoolica(ontem)
+    # relatorio_bomboniere(ontem)
+    # relatorio_cerveja(ontem)
+    # relatorio_food(ontem)
+    # relatorio_cigarro(ontem)
+    # relatorio_isqueiros(ontem)
     posto_chacaltaya()
     messagebox.showinfo("Etapa 8", "Relatórios atualizados com sucesso!")
