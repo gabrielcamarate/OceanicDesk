@@ -53,12 +53,14 @@ Modern and robust automation system for administrative routines at a gas station
 
 <br>
 
-## 🛡️ Robustez e Boas Práticas
+## 🛡️ Security and Best Practices
 
-- O sistema exige que variáveis sensíveis (login, senha, caminhos de planilhas, email) estejam corretamente preenchidas no arquivo `.env`.
-- Caso alguma variável obrigatória esteja ausente, o sistema exibirá um erro amigável e não permitirá a execução.
-- Caminhos de arquivos são checados antes de uso para evitar falhas inesperadas.
-- O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`.
+- The system requires sensitive variables (login, password, spreadsheet paths, email) to be properly filled in the `.env` file.
+- If any required variable is missing, the system will display a friendly error and will not allow execution.
+- File paths are checked before use to avoid unexpected failures.
+- The Tesseract path can be configured via the `TESSERACT_CMD` environment variable.
+- **IMPORTANT:** Never commit the `.env` file to version control as it contains sensitive information.
+- All user credentials are now stored as environment variables for enhanced security.
 
 ## 🚀 How to Run
 
@@ -76,11 +78,23 @@ $ pip install -r requirements.txt
 Create a `.env` file in the root with your credentials:
 
 ```dotenv
+# System authentication
 LOGIN_SISTEMA=your_user
 SENHA_SISTEMA=your_password
+
+# Email configuration
 EMAIL_REMETENTE=your_email@domain.com
 SENHA_EMAIL=your_email_password
 EMAIL_DESTINATARIO=recipient@domain.com
+
+# EMSys3 user authentication
+USUARIO_NILTON=NILTON.BARBOSA
+SENHA_NILTON=your_nilton_password
+USUARIO_ELIANE=ELIANE.MARIA
+SENHA_ELIANE=your_eliane_password
+
+# Optional: Tesseract OCR path
+TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
 
 To run the application:

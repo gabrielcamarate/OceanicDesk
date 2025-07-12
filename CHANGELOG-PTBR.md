@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.3] - 2024-12-19
+### Segurança
+- Removidos dados sensíveis hardcoded (usuários e senhas) do código
+- Adicionadas variáveis de ambiente para autenticação de usuários (USUARIO_NILTON, SENHA_NILTON, USUARIO_ELIANE, SENHA_ELIANE)
+- Aprimorada segurança exigindo que todas as credenciais sejam armazenadas no arquivo .env
+- Adicionadas mensagens de erro amigáveis quando variáveis de ambiente obrigatórias estão ausentes
+
+### Alterado
+- Atualizada documentação para refletir novas práticas de segurança
+- Aprimorado tratamento de erros para credenciais de autenticação ausentes
+
 ## [1.4.2] - 2024-12-19
 ### Adicionado
 - Adicionada marca "OceanicDesk" em todos os títulos de janela

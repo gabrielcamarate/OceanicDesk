@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.3] - 2024-12-19
+### Security
+- Removed hardcoded sensitive data (usernames and passwords) from the codebase
+- Added environment variables for user authentication (USUARIO_NILTON, SENHA_NILTON, USUARIO_ELIANE, SENHA_ELIANE)
+- Enhanced security by requiring all credentials to be stored in .env file
+- Added friendly error messages when required environment variables are missing
+
+### Changed
+- Updated documentation to reflect new security practices
+- Improved error handling for missing authentication credentials
+
 ## [1.4.2] - 2024-12-19
 ### Added
 - Added "OceanicDesk" branding to all window titles

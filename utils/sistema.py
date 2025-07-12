@@ -13,6 +13,8 @@ from utils.file_utils import corrigir_cache_excel_com
 from utils.helpers import esperar_elemento
 from utils.path_utils import get_captura_path, get_system_path, get_desktop_path
 import pygetwindow as gw
+from dotenv import load_dotenv
+load_dotenv()
 
 def mostrar_area_de_trabalho():
     """Minimiza todas as janelas no Windows."""
@@ -215,10 +217,14 @@ def login_emsys3():
     pyautogui.press("enter")
     time.sleep(6.5)
     pyautogui.press("tab", presses=2, interval=0.2)
-    pyautogui.write("NILTON.BARBOSA")
+    usuario = os.getenv("USUARIO_NILTON")
+    senha = os.getenv("SENHA_NILTON")
+    if not usuario or not senha:
+        raise EnvironmentError("Variáveis USUARIO_NILTON e SENHA_NILTON não definidas no .env")
+    pyautogui.write(usuario)
     pyautogui.press("tab")
     time.sleep(0.5)
-    pyautogui.write("123")
+    pyautogui.write(senha)
     pyautogui.press("enter")
     esperar_elemento(get_captura_path("emsys_alert.png"), timeout=60)
 
@@ -483,9 +489,13 @@ def posto_chacaltaya():
     pyautogui.click(29,81, duration=0.2) 
     time.sleep(6)
     pyautogui.press("tab")
-    pyautogui.write("ELIANE.MARIA")
+    usuario = os.getenv("USUARIO_ELIANE")
+    senha = os.getenv("SENHA_ELIANE")
+    if not usuario or not senha:
+        raise EnvironmentError("Variáveis USUARIO_ELIANE e SENHA_ELIANE não definidas no .env")
+    pyautogui.write(usuario)
     pyautogui.press("tab")
-    pyautogui.write("220508")
+    pyautogui.write(senha)
     pyautogui.press("enter")
     time.sleep(30)
     pyautogui.click(155,38)

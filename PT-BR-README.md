@@ -69,11 +69,23 @@ $ pip install -r requirements.txt
 Crie um arquivo `.env` na raiz com suas credenciais:
 
 ```dotenv
+# Autenticação do sistema
 LOGIN_SISTEMA=seu_usuario
 SENHA_SISTEMA=sua_senha
+
+# Configuração de email
 EMAIL_REMETENTE=seu_email@dominio.com
 SENHA_EMAIL=sua_senha_email
 EMAIL_DESTINATARIO=destinatario@dominio.com
+
+# Autenticação de usuários EMSys3
+USUARIO_NILTON=NILTON.BARBOSA
+SENHA_NILTON=sua_senha_nilton
+USUARIO_ELIANE=ELIANE.MARIA
+SENHA_ELIANE=sua_senha_eliane
+
+# Opcional: Caminho do Tesseract OCR
+TESSERACT_CMD=C:\Program Files\Tesseract-OCR\tesseract.exe
 ```
 
 Para rodar a aplicação:
@@ -106,12 +118,14 @@ Feito com ❤️ por Gabriel Camarate. Entre em contato!
 [![Gmail](https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:gabrielcamarate@icloud.com)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielcamarate) 
 
-## 🛡️ Robustez e Boas Práticas
+## 🛡️ Segurança e Boas Práticas
 
 - O sistema exige que variáveis sensíveis (login, senha, caminhos de planilhas, email) estejam corretamente preenchidas no arquivo `.env`.
 - Caso alguma variável obrigatória esteja ausente, o sistema exibirá um erro amigável e não permitirá a execução.
 - Caminhos de arquivos são checados antes de uso para evitar falhas inesperadas.
-- O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`. 
+- O caminho do Tesseract pode ser configurado via variável de ambiente `TESSERACT_CMD`.
+- **IMPORTANTE:** Nunca faça commit do arquivo `.env` no controle de versão, pois ele contém informações sensíveis.
+- Todas as credenciais de usuário agora são armazenadas como variáveis de ambiente para maior segurança. 
 
 ## 📝 Changelog
 
