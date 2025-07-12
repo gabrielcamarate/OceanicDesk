@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 from pathlib import Path
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 # Criar pasta de logs se não existir
 log_dir = Path(__file__).resolve().parent.parent / "logs"
