@@ -1,5 +1,20 @@
 # Changelog - OceanicDesk
 
+## [1.4.6] - 2024-12-19
+
+### Adicionado
+- **Documentação Completa**: Criada documentação específica para sistema de alertas visuais
+- **Testes Avançados**: Implementados testes separados para simular bugs e cenários específicos
+- **Janela Oculta**: Janela principal agora fica oculta para não interferir com interface
+- **README Atualizado**: Documentação principal atualizada com informações sobre alertas
+- **Teste de Bug**: Teste específico para simular bug de sobreposição visual
+
+### Melhorado
+- **Testes**: Sistema de testes mais robusto e organizado
+- **Documentação**: Documentação técnica detalhada e acessível
+- **UX**: Interface mais limpa sem janelas desnecessárias
+- **Manutenibilidade**: Melhor estrutura de testes e documentação
+
 ## [1.4.5] - 2024-12-19
 
 ### Corrigido

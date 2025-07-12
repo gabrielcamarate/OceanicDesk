@@ -1,5 +1,20 @@
 # Changelog - OceanicDesk
 
+## [1.4.6] - 2024-12-19
+
+### Added
+- **Complete Documentation**: Created specific documentation for visual alert system
+- **Advanced Tests**: Implemented separate tests to simulate bugs and specific scenarios
+- **Hidden Window**: Main window now hidden to avoid interface interference
+- **Updated README**: Main documentation updated with alert system information
+- **Bug Test**: Specific test to simulate visual overlap bug
+
+### Improved
+- **Tests**: More robust and organized testing system
+- **Documentation**: Detailed and accessible technical documentation
+- **UX**: Cleaner interface without unnecessary windows
+- **Maintainability**: Better test and documentation structure
+
 ## [1.4.5] - 2024-12-19
 
 ### Fixed

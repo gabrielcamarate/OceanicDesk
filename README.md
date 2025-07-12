@@ -19,7 +19,10 @@ Modern and robust automation system for administrative routines at a gas station
 
 * [About](#-about)
 * [Technologies Used](#-technologies-used)
+* [Visual Alert System](#-visual-alert-system)
 * [How to Run](#-how-to-run)
+* [Testing](#-testing)
+* [Documentation](#-documentation)
 * [License](#-license)
 * [Contact](#-contact)
 
@@ -31,6 +34,7 @@ Modern and robust automation system for administrative routines at a gas station
 
 **Key features:**
 *   **Intuitive GUI (Tkinter):** Simple interface with dedicated buttons and log panel.
+*   **Visual Alert System:** Modern, non-intrusive alerts with fade animations and dark theme.
 *   **Automation with External Systems (pyautogui):** Simulates keyboard/mouse to interact with AutoSystem and EMSys3.
 *   **Advanced Excel Handling (openpyxl, pandas):** Reads, writes, and processes Excel files for financial and sales data.
 *   **Automated Email Reports:** Sends daily reports to stakeholders.
@@ -38,6 +42,7 @@ Modern and robust automation system for administrative routines at a gas station
 *   **Developer Mode:** Detailed, scrollable logs for debugging.
 *   **Daily Log Files:** All operations are logged for auditing.
 *   **Automated Testing:** Unit tests ensure reliability.
+*   **Thread-Safe Operations:** Safe concurrent operations with visual feedback.
 
 <br>
 
@@ -50,6 +55,35 @@ Modern and robust automation system for administrative routines at a gas station
 - pyautogui
 - pywin32
 - python-dotenv
+
+<br>
+
+## 🔔 Visual Alert System
+
+The OceanicDesk features a modern visual alert system that provides real-time feedback for all operations:
+
+### ✨ Features
+- **Dark Theme**: Elegant dark interface with smooth animations
+- **6 Alert Types**: Success, Error, Info, Warning, Dev, Progress
+- **Smart Positioning**: Bottom-right corner with intelligent stacking
+- **Thread-Safe**: Supports concurrent operations safely
+- **Non-Intrusive**: 92% opacity with fade in/out animations
+- **Always on Top**: Alerts remain visible over other windows
+
+### 🎨 Alert Types
+- **Success** (Green): Completed operations
+- **Error** (Red): Critical failures and errors
+- **Info** (Blue): General information and status
+- **Warning** (Yellow): Important warnings
+- **Dev** (Purple): Technical logs and debug info
+- **Progress** (Cyan): Operations with progress bar
+
+### 📍 Positioning
+- **Default**: Bottom-right corner
+- **Stacking**: Multiple alerts stack vertically
+- **Custom**: Support for specific positioning
+
+For detailed documentation, see [Visual Alerts Documentation](docs/ALERTAS_VISUAIS.md).
 
 <br>
 
@@ -103,13 +137,32 @@ To run the application:
 python run.py
 ```
 
-To run the tests:
+## 🧪 Testing
 
+### Run All Tests
 ```bash
 python -m unittest discover -s tests
 ```
 
-> **Note:** The automation depends on screen resolution and window positions. Target systems must be visible and in the foreground. Only works on Windows.
+### Visual Alert Tests
+```bash
+python tests/test_alerta_visual.py
+```
+
+### Specific Test Categories
+- **Basic Alerts**: All alert types
+- **Simultaneous Alerts**: Multiple alerts at once
+- **Progress Alerts**: Progress bar functionality
+- **Positioning**: Alert positioning tests
+- **Thread Safety**: Concurrent operations
+- **Bug Simulation**: Known issues reproduction
+
+## 📚 Documentation
+
+- **[Visual Alerts System](docs/ALERTAS_VISUAIS.md)**: Complete documentation of the alert system
+- **[Portuguese README](PT-BR-README.md)**: Portuguese version of this documentation
+- **[Changelog](CHANGELOG-EN.md)**: Detailed version history
+- **[Build Guide](BUILD-README.md)**: Instructions for building the executable
 
 <br>
 
@@ -128,6 +181,20 @@ Made with ❤️ by Gabriel Camarate. Get in touch!
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gabrielcamarate)
 
 ## 📝 Changelog
+
+### v1.4.5 (Current)
+- **Visual Alert System**: Fixed multiple simultaneous alerts issue
+- **Positioning**: Moved alerts to bottom-right corner to avoid pyautogui conflicts
+- **Thread Safety**: Optimized thread system and reduced exceptions
+- **Performance**: Reduced excessive alerts and improved user experience
+- **Hidden Window**: Main window now hidden to avoid interference
+
+### v1.4.4
+- **Visual Alert System**: Implemented modern alert system with fade animations
+- **Multiple Alert Types**: Success, Error, Info, Warning, Dev, Progress
+- **Smart Positioning**: Intelligent alert stacking and positioning
+- **Thread-Safe**: Safe concurrent operations with visual feedback
+- **Complete Integration**: Alerts integrated throughout the entire project
 
 ### v1.4.1
 - Type and robustness fixes in `sistema.py` and `helpers.py` (Pyright compatibility)
