@@ -17,7 +17,7 @@ from projecao.combustiveis import (
 )
 from projecao.consolidado import atualizar_valores_de_vendas_geral
 from tkinter import messagebox
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 load_dotenv()
 
 

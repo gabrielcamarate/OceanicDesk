@@ -9,7 +9,7 @@ from utils.etapas import (
     etapa7_fechamento_caixa,
     etapa8_projecao_de_vendas
 )
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 import time
 
 

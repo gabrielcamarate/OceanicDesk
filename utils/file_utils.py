@@ -3,7 +3,7 @@ import time
 import win32com.client
 import win32com.client.gencache
 import shutil
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def aguardar_arquivo(caminho_arquivo, timeout=30, intervalo=0.5):

@@ -5,7 +5,7 @@ from pywinauto.application import Application
 from pywinauto import timings
 from config import EMAIL_REMETENTE, SENHA_EMAIL
 import os
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def enviar_relatorio(caminho_arquivo, data_ontem, chacal=False):

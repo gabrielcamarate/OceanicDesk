@@ -42,7 +42,7 @@ from utils.automacao import extrair_valor_tmp, acessar_fechamento_caixa
 from utils.automacao import acessar_fechamento_caixa, automatizar_fechamento_caixa
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 load_dotenv()
 
 # Global modificável se planilha for definida externamente

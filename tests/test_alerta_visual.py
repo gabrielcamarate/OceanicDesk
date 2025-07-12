@@ -1,5 +1,5 @@
 import time
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 if __name__ == "__main__":
     mostrar_alerta_visual("Sucesso!", "Seu backup foi realizado com sucesso.", tipo="success")

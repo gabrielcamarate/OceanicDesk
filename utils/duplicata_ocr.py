@@ -7,7 +7,7 @@ import os
 import shutil
 from pathlib import Path
 from utils.path_utils import get_project_root, get_system_path
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 
 PASTA_CAPTURAS = get_project_root() / "capturas_ocr"
 PASTA_CAPTURAS.mkdir(exist_ok=True)

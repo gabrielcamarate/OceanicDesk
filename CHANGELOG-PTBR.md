@@ -1,5 +1,18 @@
 # Changelog - OceanicDesk
 
+## [1.4.7] - 2025-07-12
+
+### 🏗️ Arquitetura
+- **Finalização da Modularização**: Removido `utils/alerta_visual.py`, todo o projeto agora utiliza apenas `interfaces/alerta_visual.py`
+- **Limpeza de Código**: Removido código legado e imports antigos
+- **Padronização Completa**: Todos os módulos e testes usam o novo padrão de importação
+
+### 🔧 Melhorias Técnicas
+- **Projeto 100% Modularizado**: Base pronta para futuras melhorias e manutenção
+- **Histórico limpo**: Commits documentando cada etapa da migração
+
+---
+
 ## [1.4.6] - 2025-07-12
 
 ### 🏗️ Arquitetura

@@ -7,7 +7,7 @@ from utils.excel_ops import LETRA_PLANILHA
 
 # Esses dois abaixo você precisa garantir que existem em outro módulo
 from utils.extratores import salvar_planilha_emsys, extrair_food_tmp
-from utils.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 
 
 def extrair_valores_e_somar(chacal=False):

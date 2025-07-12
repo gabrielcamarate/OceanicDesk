@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from utils.logger import logger
 from utils.file_utils import aguardar_arquivo, corrigir_cache_excel_com
 from utils.excel_ops import buscar_valor_total_geral
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 
 
 def salvar_planilha_emsys():

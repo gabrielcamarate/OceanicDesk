@@ -1,7 +1,7 @@
 import tkinter as tk
 import time
 from controllers.app_controller import AppController
-from utils.alerta_visual import mostrar_alerta_visual
+from interfaces.alerta_visual import mostrar_alerta_visual
 from utils.logger import inicializar_logger
 
 
