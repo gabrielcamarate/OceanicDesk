@@ -10,7 +10,7 @@ class JanelaPrincipal:
         self.control = control
         self.caminho_planilha_dinamico = None
 
-        self.root.title("Painel de Controle - Relatórios Oceanico")
+        self.root.title("OceanicDesk - Painel de Controle - Relatórios Oceanico")
         self.root.geometry("650x600")
         self.root.configure(padx=10, pady=10)
         

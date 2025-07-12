@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.2] - 2024-12-19
+### Added
+- Added "OceanicDesk" branding to all window titles
+- Added icon support for all secondary windows (entrada_dados, metodos_pagamento, valores_fechamento)
+- Added comprehensive icon loading function to all interface modules
+
+### Changed
+- Updated main window title to "OceanicDesk - Painel de Controle - Relatórios Oceanico"
+- Updated secondary window titles to include "OceanicDesk" prefix
+- Enhanced icon loading with multiple fallback paths for all windows
+
+### Fixed
+- Fixed missing icons in secondary windows
+- Fixed window title consistency across all interfaces
+
 ## [1.4.1] - 2025-07-12
 ### Fixed
 - Removed all hardcoded paths from the codebase for better portability.

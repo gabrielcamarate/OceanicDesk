@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.2] - 2024-12-19
+### Adicionado
+- Adicionada marca "OceanicDesk" em todos os títulos de janela
+- Adicionado suporte a ícones para todas as janelas secundárias (entrada_dados, metodos_pagamento, valores_fechamento)
+- Adicionada função abrangente de carregamento de ícones para todos os módulos de interface
+
+### Alterado
+- Atualizado título da janela principal para "OceanicDesk - Painel de Controle - Relatórios Oceanico"
+- Atualizados títulos das janelas secundárias para incluir prefixo "OceanicDesk"
+- Aprimorado carregamento de ícones com múltiplos caminhos de fallback para todas as janelas
+
+### Corrigido
+- Corrigidos ícones ausentes nas janelas secundárias
+- Corrigida consistência dos títulos de janela em todas as interfaces
+
 ## [1.4.1] - 2025-07-12
 ### Corrigido
 - Removidos todos os caminhos hardcoded do código para melhor portabilidade.
