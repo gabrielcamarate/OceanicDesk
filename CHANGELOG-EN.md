@@ -1,4 +1,19 @@
-# Changelog
+# Changelog - OceanicDesk
+
+## [1.4.5] - 2024-12-19
+
+### Fixed
+- **Alert System**: Fixed issue with multiple simultaneous alerts at application startup
+- **Positioning**: Alerts moved to bottom-right corner to avoid conflicts with pyautogui
+- **Threads**: Optimized thread system to reduce exceptions and improve performance
+- **Performance**: Reduced excessive alerts during stage execution
+- **Delays**: Added delays between stages for better user experience
+- **Control**: Implemented simultaneous alert control system with thread-safe lock
+
+### Improved
+- **UX**: Faster and less intrusive alerts
+- **Stability**: More stable system during automation execution
+- **Compatibility**: Better compatibility with pyautogui and automations
 
 ## [1.4.4] - 2024-12-19
 ### Added

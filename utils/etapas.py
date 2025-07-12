@@ -50,8 +50,6 @@ CAMINHO_PLANILHA_DINAMICO = None
 
 
 def etapa1_backup_e_precos():
-    mostrar_alerta_visual("Iniciando Etapa 1", "Backup e atualização de preços", tipo="info")
-    
     # Validação de configuração
     if not CAMINHO_PLANILHA and not CAMINHO_PLANILHA_DINAMICO:
         mostrar_alerta_visual("Erro de Configuração", "Caminho da planilha não definido", tipo="error")
@@ -60,8 +58,6 @@ def etapa1_backup_e_precos():
     caminho = CAMINHO_PLANILHA_DINAMICO or CAMINHO_PLANILHA
     assert caminho is not None, "Caminho da planilha não pode ser None."
     
-    mostrar_alerta_visual("Validando arquivo", f"Verificando: {os.path.basename(caminho)}", tipo="dev")
-    
     if not os.path.exists(caminho):
         mostrar_alerta_visual("Arquivo não encontrado", f"Planilha não existe: {caminho}", tipo="error")
         raise FileNotFoundError(f"Planilha não encontrada: {caminho}")
@@ -69,23 +65,16 @@ def etapa1_backup_e_precos():
     # Backup da planilha
     mostrar_alerta_visual("Criando backup", "Gerando cópia de segurança...", tipo="info")
     criar_backup_planilha(caminho)
-    mostrar_alerta_visual("Backup concluído", "Cópia de segurança criada com sucesso", tipo="success")
     
     # Carregando planilha
-    mostrar_alerta_visual("Carregando planilha", "Abrindo arquivo Excel...", tipo="dev")
     wb = load_workbook(caminho)
-    mostrar_alerta_visual("Planilha carregada", "Arquivo aberto com sucesso", tipo="dev")
     
     # Copiando intervalo
-    mostrar_alerta_visual("Copiando dados", "Transferindo preços K5:R14...", tipo="info")
+    mostrar_alerta_visual("Processando dados", "Transferindo e formatando preços...", tipo="info")
     copiar_intervalo_k5_r14(wb, DATA_HOJE)
-    
-    # Formatando coluna
-    mostrar_alerta_visual("Formatando dados", "Aplicando formatação vermelha...", tipo="dev")
     formatar_coluna_o_em_vermelho(wb, DATA_HOJE)
     
     # Salvando alterações
-    mostrar_alerta_visual("Salvando alterações", "Persistindo modificações...", tipo="info")
     wb.save(caminho)
     
     mostrar_alerta_visual("Etapa 1 Concluída", "Backup e preços atualizados com sucesso!", tipo="success")
@@ -93,8 +82,6 @@ def etapa1_backup_e_precos():
 
 
 def etapa2_minimercado():
-    mostrar_alerta_visual("Iniciando Etapa 2", "Relatório Mini-Mercado", tipo="info")
-    
     # Validação de credenciais
     if not LOGIN_SISTEMA or not SENHA_SISTEMA:
         mostrar_alerta_visual("Erro de Configuração", "Credenciais do sistema não definidas", tipo="error")
@@ -106,15 +93,11 @@ def etapa2_minimercado():
     # Login no sistema
     mostrar_alerta_visual("Conectando ao sistema", "Realizando login...", tipo="info")
     auto_system_login(LOGIN_SISTEMA, SENHA_SISTEMA)
-    mostrar_alerta_visual("Login realizado", "Conectado ao AutoSystem", tipo="success")
     
-    # Extraindo valor
-    mostrar_alerta_visual("Extraindo dados", "Processando relatório temporário...", tipo="info")
+    # Extraindo e inserindo valor
+    mostrar_alerta_visual("Processando dados", "Extraindo e salvando relatório...", tipo="info")
     valor = extrair_valor_tmp()
-    mostrar_alerta_visual("Dados extraídos", f"Valor encontrado: R$ {valor:,.2f}", tipo="dev")
     
-    # Inserindo na planilha
-    mostrar_alerta_visual("Inserindo dados", "Salvando valor na planilha...", tipo="info")
     wb = load_workbook(caminho)
     inserir_valor_planilha(wb, valor, DATA_HOJE)
     wb.save(caminho)
@@ -213,21 +196,14 @@ def etapa8_projecao_de_vendas() -> None:
     - Atualização de planilhas projeção
     - Atualização completa de relatórios do Meu Controle
     """
-    mostrar_alerta_visual("Iniciando Etapa 8", "Projeção de Vendas", tipo="info")
-    
     hoje = datetime.now()
     dia_inicio = hoje.replace(day=1).strftime("%d/%m/%Y")
     dia_fim = (hoje - timedelta(days=1)).strftime("%d/%m/%Y")
     ontem = hoje - timedelta(days=1)
     ontem = ontem.day
     
-    mostrar_alerta_visual("Configurando período", f"De: {dia_inicio} | Até: {dia_fim}", tipo="dev")
-    
     # Processo comentado - descomente conforme necessário
-    mostrar_alerta_visual("Atualizando projeções", "Processando planilhas de projeção...", tipo="info")
     # atualizando_planilhas_projecao()
-    
-    mostrar_alerta_visual("Acessando relatórios", "Conectando ao Meu Controle...", tipo="info")
     # acessar_relatorio_subcategoria()
     
     # Relatórios específicos
@@ -241,12 +217,12 @@ def etapa8_projecao_de_vendas() -> None:
         ("Isqueiros", lambda: relatorio_isqueiros(ontem))
     ]
     
-    for i, (nome, funcao) in enumerate(relatorios):
-        progresso = int((i / len(relatorios)) * 100)
-        mostrar_alerta_progresso(f"Processando {nome}", f"Relatório {i+1} de {len(relatorios)}", progresso)
+    # for i, (nome, funcao) in enumerate(relatorios):
+    #     progresso = int((i / len(relatorios)) * 100)
+    #     mostrar_alerta_progresso(f"Processando {nome}", f"Relatório {i+1} de {len(relatorios)}", progresso)
         # funcao()  # Descomente conforme necessário
     
-    # Posto Chacaltaya
+    # Posto Chacaltaya - único alerta durante pyautogui
     mostrar_alerta_visual("Processando Chacaltaya", "Atualizando dados do posto...", tipo="info")
     posto_chacaltaya()
     
