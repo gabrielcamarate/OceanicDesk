@@ -8,4 +8,6 @@ config/
 config.py
 __pycache__/
 *.pyc 
-.env 
+.env
+build/
+dist/ 
