@@ -63,14 +63,12 @@ def etapa1_backup_e_precos():
         raise FileNotFoundError(f"Planilha não encontrada: {caminho}")
     
     # Backup da planilha
-    mostrar_alerta_visual("Criando backup", "Gerando cópia de segurança...", tipo="info")
     criar_backup_planilha(caminho)
     
     # Carregando planilha
     wb = load_workbook(caminho)
     
     # Copiando intervalo
-    mostrar_alerta_visual("Processando dados", "Transferindo e formatando preços...", tipo="info")
     copiar_intervalo_k5_r14(wb, DATA_HOJE)
     formatar_coluna_o_em_vermelho(wb, DATA_HOJE)
     
@@ -91,7 +89,6 @@ def etapa2_minimercado():
     assert caminho is not None, "Caminho da planilha não pode ser None."
     
     # Login no sistema
-    mostrar_alerta_visual("Conectando ao sistema", "Realizando login...", tipo="info")
     auto_system_login(LOGIN_SISTEMA, SENHA_SISTEMA)
     
     # Extraindo e inserindo valor

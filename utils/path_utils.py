@@ -160,7 +160,6 @@ def get_system_path(program_name):
     # Procura o primeiro caminho que existe
     for path in possible_paths:
         if os.path.exists(path):
-            mostrar_alerta_visual(f"{program_name} encontrado", f"Caminho: {path}", tipo="dev")
             return path
     
     # Se não encontrou, mostra aviso e retorna o primeiro caminho como fallback

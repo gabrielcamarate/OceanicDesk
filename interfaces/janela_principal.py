@@ -179,7 +179,6 @@ class JanelaPrincipal:
         funcao_etapa(completo=(resposta == "no"))
 
     def _selecionar_planilha(self):
-        mostrar_alerta_visual("Selecionando planilha...", "Aguarde enquanto a janela de seleção é aberta.", tipo="info")
         caminho = filedialog.askopenfilename(
             title="Selecione a planilha", filetypes=[("Excel files", "*.xlsx")]
         )
@@ -220,7 +219,6 @@ class JanelaPrincipal:
         return self.caminho_planilha_dinamico
 
     def _mostrar_sobre(self):
-        mostrar_alerta_visual("Sobre o sistema", "Exibindo informações do OceanicDesk.", tipo="info")
         # Tenta ler a versão do arquivo VERSION
         try:
             import os, sys

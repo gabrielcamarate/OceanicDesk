@@ -75,8 +75,6 @@ def calcular_expressao(expr):
 
 
 def esperar_elemento(caminho_imagem, timeout=60, confidence=0.8):
-    mostrar_alerta_visual("Aguardando elemento", f"Procurando: {os.path.basename(caminho_imagem)}", tipo="info")
-    
     inicio = time.time()
     tentativas = 0
     
@@ -87,7 +85,6 @@ def esperar_elemento(caminho_imagem, timeout=60, confidence=0.8):
             local = pyautogui.locateOnScreen(caminho_imagem, confidence=confidence)
             
             if local:
-                mostrar_alerta_visual("Elemento encontrado", f"Localização: {local}", tipo="success")
                 print(local)
                 return local
             else:

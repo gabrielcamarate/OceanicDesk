@@ -17,7 +17,6 @@ def aguardar_arquivo(caminho_arquivo, timeout=30, intervalo=0.5):
     Raises:
         FileNotFoundError: Se o arquivo não for encontrado dentro do tempo limite.
     """
-    mostrar_alerta_visual("Aguardando arquivo", f"Verificando: {os.path.basename(caminho_arquivo)}", tipo="info")
     
     tempo_esperado = 0
     while not os.path.exists(caminho_arquivo) and tempo_esperado < timeout:
@@ -34,8 +33,7 @@ def aguardar_arquivo(caminho_arquivo, timeout=30, intervalo=0.5):
             f"Arquivo {caminho_arquivo} não encontrado após {timeout} segundos."
         )
     
-    mostrar_alerta_visual("Arquivo encontrado", f"Arquivo disponível: {os.path.basename(caminho_arquivo)}", tipo="success")
-
+    
 def corrigir_cache_excel_com():
     """
     Limpa e regenera o cache COM do Excel, caso esteja corrompido.
@@ -45,17 +43,14 @@ def corrigir_cache_excel_com():
     try:
         # Caminho do cache gerado pelo pywin32
         cache_dir = win32com.client.gencache.GetGeneratePath()
-        mostrar_alerta_visual("Verificando cache", f"Diretório: {cache_dir}", tipo="dev")
         
         if os.path.exists(cache_dir):
-            mostrar_alerta_visual("Removendo cache", "Limpando cache corrompido...", tipo="dev")
             shutil.rmtree(cache_dir, ignore_errors=True)
             print(f"[COM CACHE] Cache COM removido: {cache_dir}")
         else:
             mostrar_alerta_visual("Cache não encontrado", "Diretório não existe", tipo="warning")
 
         # Força recriação do cache para o Excel
-        mostrar_alerta_visual("Regenerando cache", "Criando novo cache do Excel...", tipo="dev")
         win32com.client.gencache.EnsureDispatch("Excel.Application")
         print("[COM CACHE] Cache do Excel COM regenerado com sucesso.")
         mostrar_alerta_visual("Cache corrigido", "Processo finalizado com sucesso", tipo="success")

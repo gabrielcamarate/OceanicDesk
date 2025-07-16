@@ -155,7 +155,6 @@ def preencher_cartoes_com_duplicatas(resultados):
 
 
 def limpar_capturas_ocr():
-    mostrar_alerta_visual("Limpando capturas", "Removendo arquivos temporários...", tipo="info")
     
     if PASTA_CAPTURAS.exists():
         arquivos_removidos = 0
@@ -167,6 +166,5 @@ def limpar_capturas_ocr():
                 mostrar_alerta_visual("Erro ao remover", f"Falha: {arquivo.name}", tipo="error")
                 print(f"[ERRO] Falha ao excluir {arquivo}: {e}")
         
-        mostrar_alerta_visual("Limpeza concluída", f"{arquivos_removidos} arquivos removidos", tipo="success")
     else:
         mostrar_alerta_visual("Pasta não encontrada", "Nenhum arquivo para remover", tipo="warning")

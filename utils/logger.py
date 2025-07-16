@@ -26,11 +26,9 @@ def registrar_log(mensagem: str):
     # Mostra alerta visual apenas para mensagens importantes
     if any(palavra in mensagem.lower() for palavra in ['erro', 'error', 'falha', 'sucesso', 'concluído', 'finalizado']):
         tipo = 'error' if any(palavra in mensagem.lower() for palavra in ['erro', 'error', 'falha']) else 'success'
-        mostrar_alerta_visual("Log registrado", mensagem[:50] + "..." if len(mensagem) > 50 else mensagem, tipo=tipo)
 
 
 def inicializar_logger():
     """Inicializa o sistema de logging com alerta visual"""
-    mostrar_alerta_visual("Sistema de logs", f"Log file: {log_file.name}", tipo="dev")
     logger.info("Sistema de logging inicializado")
-    mostrar_alerta_visual("Logger ativo", "Sistema de logs pronto", tipo="success")
+ 
