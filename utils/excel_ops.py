@@ -18,9 +18,13 @@ from projecao.combustiveis import (
 from projecao.consolidado import atualizar_valores_de_vendas_geral
 from tkinter import messagebox
 from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
+import time
+import calendar
+from datetime import datetime
 load_dotenv()
 
-
+hoje = datetime.today()
+dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
 LETRA_PLANILHA = "H"
 
 def copiar_intervalo_k5_r14(wb, data_referencia):
@@ -289,7 +293,7 @@ def extrair_valores_relatorio_combustivel_tmp(ontem, chacal=False):
     Fórmula usada: =valor/dia_fim*30
     """
     load_dotenv()
-
+    
     # Caminhos
     caminho_tmp = Path.home() / "Desktop" / "tmp.xlsx"
     caminho_meu_controle = os.getenv("CAMINHO_MEU_CONTROLE")
@@ -314,8 +318,8 @@ def extrair_valores_relatorio_combustivel_tmp(ontem, chacal=False):
         destino = {
             f"{LETRA_PLANILHA}10": "gasolina_comum",
             f"{LETRA_PLANILHA}11": "gasolina_aditivada",
-            f"{LETRA_PLANILHA}H12": "etanol_comum",
-            f"{LETRA_PLANILHA}H13": "diesel_s10",
+            f"{LETRA_PLANILHA}12": "etanol_comum",
+            f"{LETRA_PLANILHA}13": "diesel_s10",
         }
     else:
         destino = {
@@ -329,7 +333,7 @@ def extrair_valores_relatorio_combustivel_tmp(ontem, chacal=False):
     for celula, nome_var in destino.items():
         valor = valores[nome_var]
         if isinstance(valor, (int, float)):
-            formula = f"={valor}/{ontem}*30"
+            formula = f"={valor}/{ontem}*{dias_do_mes}"
             ws_controle[celula] = formula
 
     wb_controle.save(caminho_meu_controle)
@@ -390,7 +394,7 @@ def extrair_valores_relatorio_bebidas_nao_alcoolicas_tmp(dia_fim: int, chacal=Fa
     wb_controle = load_workbook(caminho_meu_controle)
     ws_controle = wb_controle.active
 
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     
     if chacal:
         ws_controle[f"{LETRA_PLANILHA}17"] = formula
@@ -432,7 +436,7 @@ def relatorio_bomboniere_tmp(dia_fim: int, chacal=False):
     wb_controle = load_workbook(caminho_meu_controle)
     ws_controle = wb_controle.active
 
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     if chacal:
         ws_controle[f"{LETRA_PLANILHA}18"] = formula
     else:
@@ -472,7 +476,7 @@ def relatorio_cerveja_tmp(dia_fim: int, chacal=False):
     wb_controle = load_workbook(caminho_meu_controle)
     ws_controle = wb_controle.active
 
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     if chacal:
         ws_controle[f"{LETRA_PLANILHA}19"] = formula
     else:
@@ -512,7 +516,7 @@ def relatorio_cigarro_tmp(dia_fim: int, chacal=False):
     wb_controle = load_workbook(caminho_meu_controle)
     ws_controle = wb_controle.active
 
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     if chacal:
         ws_controle[f"{LETRA_PLANILHA}22"] = formula
     else:
@@ -545,7 +549,7 @@ def relatorio_isqueiro_tmp(dia_fim: int, chacal=False):
     wb_controle = load_workbook(caminho_meu_controle)
     ws_controle = wb_controle.active
 
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     if chacal:
         ws_controle[f"{LETRA_PLANILHA}21"] = formula
     else:

@@ -24,14 +24,14 @@ def atualizar_projecao_vendas(
         caminho_arquivo_vendas, sheet_name=None, engine="openpyxl"
     )
 
-    # Descobre o número de dias do mês atual
-    hoje = datetime.today()
-    dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
+    # # Descobre o número de dias do mês atual
+    # hoje = datetime.today()
+    # dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
 
     proj_loja_chacaltaya = df_chacaltaya.iloc[37, 2]
     proj_acai_chacaltaya = df_chacaltaya.iloc[37, 15]
-    proj_loja_oceanico = df_oceanico[nome_aba_vendas].iloc[35, 2] * dias_do_mes
-    proj_acai_oceanico = df_oceanico[nome_aba_vendas].iloc[35, 15] * dias_do_mes
+    proj_loja_oceanico = df_oceanico[nome_aba_vendas].iloc[36, 2]
+    proj_acai_oceanico = df_oceanico[nome_aba_vendas].iloc[36, 15]
 
     wb_destino = openpyxl.load_workbook(caminho_arquivo_destino)
     aba_destino = wb_destino.active

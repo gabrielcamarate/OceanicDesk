@@ -118,3 +118,14 @@
 - Generation of README_USUARIO.txt for end-user instructions.
 - Build adjustments for .zip distribution.
 
+## [1.4.8] - 2025-07-13
+
+### Refactoring and Improvements
+- Adjustments and refactoring in process steps (`utils/etapas.py`)
+- Refactoring and improvements in Excel operations (`utils/excel_ops.py`)
+- Adjustments in sales projection function (`projecao/vendas.py`)
+- Update of dependencies in `requirements.txt`
+- Removal of obsolete file `how c90495a --name-only`
+
+---
+

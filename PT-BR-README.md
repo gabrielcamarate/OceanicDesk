@@ -129,6 +129,13 @@ Feito com ❤️ por Gabriel Camarate. Entre em contato!
 
 ## 📝 Changelog
 
+### v1.4.8
+- Refatoração e melhorias nas etapas do processo (`utils/etapas.py`)
+- Refatoração e melhorias em operações de Excel (`utils/excel_ops.py`)
+- Ajustes na função de projeção de vendas (`projecao/vendas.py`)
+- Atualização de dependências em `requirements.txt`
+- Remoção de arquivo obsoleto `how c90495a --name-only`
+
 ### v1.4.1
 - Correções de tipagem e robustez em `sistema.py` e `helpers.py` (compatibilidade Pyright)
 - Tratamento de erros aprimorado para Excel e variáveis de ambiente 

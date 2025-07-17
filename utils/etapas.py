@@ -200,8 +200,8 @@ def etapa8_projecao_de_vendas() -> None:
     ontem = ontem.day
     
     # Processo comentado - descomente conforme necessário
-    # atualizando_planilhas_projecao()
-    # acessar_relatorio_subcategoria()
+    atualizando_planilhas_projecao()
+    acessar_relatorio_subcategoria()
     
     # Relatórios específicos
     relatorios = [
@@ -214,10 +214,9 @@ def etapa8_projecao_de_vendas() -> None:
         ("Isqueiros", lambda: relatorio_isqueiros(ontem))
     ]
     
-    # for i, (nome, funcao) in enumerate(relatorios):
-    #     progresso = int((i / len(relatorios)) * 100)
-    #     mostrar_alerta_progresso(f"Processando {nome}", f"Relatório {i+1} de {len(relatorios)}", progresso)
-        # funcao()  # Descomente conforme necessário
+    for nome, func in relatorios:
+        print(f"Gerando relatório de {nome}...")
+        func()
     
     # Posto Chacaltaya - único alerta durante pyautogui
     mostrar_alerta_visual("Processando Chacaltaya", "Atualizando dados do posto...", tipo="info")

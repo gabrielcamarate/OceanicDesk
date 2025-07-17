@@ -1,5 +1,16 @@
 # Changelog - OceanicDesk
 
+## [1.4.8] - 2025-07-13
+
+### Refatoração e Melhorias
+- Ajustes e refatoração nas etapas do processo (`utils/etapas.py`)
+- Refatoração e melhorias em operações de Excel (`utils/excel_ops.py`)
+- Ajustes na função de projeção de vendas (`projecao/vendas.py`)
+- Atualização de dependências em `requirements.txt`
+- Remoção de arquivo obsoleto `how c90495a --name-only`
+
+---
+
 ## [1.4.7] - 2025-07-12
 
 ### 🏗️ Arquitetura

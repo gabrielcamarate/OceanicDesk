@@ -129,6 +129,9 @@ Made with ❤️ by Gabriel Camarate. Get in touch!
 
 ## 📝 Changelog
 
-### v1.4.1
-- Type and robustness fixes in `sistema.py` and `helpers.py` (Pyright compatibility)
-- Improved error handling for Excel and environment variables
+### v1.4.8
+- Refactoring and improvements in process steps (`utils/etapas.py`)
+- Refactoring and improvements in Excel operations (`utils/excel_ops.py`)
+- Adjustments in sales projection function (`projecao/vendas.py`)
+- Update of dependencies in `requirements.txt`
+- Removal of obsolete file `how c90495a --name-only`
