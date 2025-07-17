@@ -12,8 +12,8 @@ class JanelaPrincipal:
         self.caminho_planilha_dinamico = None
 
         self.root.title("OceanicDesk - Painel de Controle - Relatórios Oceanico")
-        self.root.geometry("650x600")
-        self.root.configure(padx=10, pady=10)
+        self.root.geometry("500x700")
+        self.root.configure(bg="#23272e", padx=10, pady=10)
         
         # Carrega o ícone da janela
         self._carregar_icone()
@@ -85,91 +85,48 @@ class JanelaPrincipal:
                 print(f"⚠️ Não foi possível definir ID do aplicativo: {e}")
 
     def _criar_interface(self):
-        tk.Label(self.root, text="Painel de Etapas", font=("Arial", 12, "bold")).pack(
-            pady=5
-        )
-
-        canvas = tk.Canvas(self.root, height=400)
-        scrollbar = tk.Scrollbar(self.root, orient="vertical", command=canvas.yview)
-        scroll_frame = tk.Frame(canvas)
-
-        scroll_frame.bind(
-            "<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-        )
-        canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
-        canvas.configure(yscrollcommand=scrollbar.set)
-
-        canvas.pack(side="left", fill="both", expand=True)
-        scrollbar.pack(side="right", fill="y")
-
+        tk.Label(self.root, text="Bem vindo ao sistema OceanicDesk", font=("Segoe UI", 14, "bold"), bg="#23272e", fg="#50fa7b", pady=12).pack()
+        main_frame = tk.Frame(self.root, bg="#23272e")
+        main_frame.pack(fill="both", expand=True)
         etapas = [
-            (
-                "[1] Criar Backup e Atualizar Preços",
-                lambda: self._perguntar_continuar(self.control.etapa1, 1),
-            ),
-            (
-                "[2] Relatório Mini-mercado",
-                lambda: self._perguntar_continuar(self.control.etapa2, 2),
-            ),
-            (
-                "[3] Relatório Litros e Descontos",
-                lambda: self._perguntar_continuar(self.control.etapa3, 3),
-            ),
-            (
-                "[4] Relatório Cashback e Pix",
-                lambda: self._perguntar_continuar(self.control.etapa4, 4),
-            ),
-            (
-                "[5] Inserir Litros Manualmente",
-                lambda: self._perguntar_continuar(self.control.etapa5, 5),
-            ),
-            (
-                "[6] Enviar Relatório de Vendas",
-                lambda: self._perguntar_continuar(self.control.etapa6, 6),
-            ),
-            (
-                "[7] Fechamento de Caixa",
-                lambda: self._perguntar_continuar(self.control.etapa7, 7),
-            ),
-            (
-                "[8] Projeção de vendas",
-                lambda: self._perguntar_continuar(self.control.etapa8, 8),
-            ),
+            ("[1] Criar Backup e Atualizar Preços", lambda: self._perguntar_continuar(self.control.etapa1, 1)),
+            ("[2] Relatório Mini-mercado", lambda: self._perguntar_continuar(self.control.etapa2, 2)),
+            ("[3] Relatório Litros e Descontos", lambda: self._perguntar_continuar(self.control.etapa3, 3)),
+            ("[4] Relatório Cashback e Pix", lambda: self._perguntar_continuar(self.control.etapa4, 4)),
+            ("[5] Inserir Litros Manualmente", lambda: self._perguntar_continuar(self.control.etapa5, 5)),
+            ("[6] Enviar Relatório de Vendas", lambda: self._perguntar_continuar(self.control.etapa6, 6)),
+            ("[7] Fechamento de Caixa", lambda: self._perguntar_continuar(self.control.etapa7, 7)),
+            ("[8] Projeção de vendas", lambda: self._perguntar_continuar(self.control.etapa8, 8)),
             ("[▶] Executar Processo Completo", self.control.executar_todas),
         ]
-
         for texto, comando in etapas:
             tk.Button(
-                scroll_frame, text=texto, command=comando, width=40, height=2
+                main_frame, text=texto, command=comando, width=40, height=2,
+                bg="#313543", fg="#f8f8f2", activebackground="#44475a", activeforeground="#50fa7b", bd=1, relief="ridge", highlightthickness=1, highlightbackground="#44475a", font=("Segoe UI", 10, "bold")
             ).pack(pady=4)
-
         tk.Button(
-            self.root, text="Selecionar Planilha", command=self._selecionar_planilha
-        ).pack(pady=6)
-
-        tk.Button(
-            self.root, text="Sobre", command=self._mostrar_sobre
-        ).pack(pady=2)
-
-        self.painel_log = tk.Text(self.root, height=6, width=70, bg="#f4f4f4")
-        self.painel_log.pack(pady=6)
-
-        self.log_buffer = []
-        self.modo_dev = MODO_DEV
-        self._atualizar_painel("Pronto para iniciar...")
-
-        tk.Checkbutton(
-            self.root, text="Modo Desenvolvedor", command=self._alternar_modo
-        ).pack()
-
-        tk.Button(
-            self.root,
-            text="[⏹] Fechar",
+            main_frame,
+            text="⏹ Fechar",
             command=self.root.quit,
             width=40,
             height=2,
-            bg="tomato",
-        ).pack(pady=10)
+            bg="#ff5555",
+            fg="#f8f8f2",
+            activebackground="#ff7979",
+            activeforeground="#23272e",
+            bd=1,
+            relief="ridge",
+            highlightthickness=1,
+            highlightbackground="#ff7979",
+            font=("Segoe UI", 10, "bold")
+        ).pack(pady=(16,2))
+        tk.Button(
+            main_frame, text="Sobre", command=self._mostrar_sobre,
+            width=40, height=2,
+            bg="#313543", fg="#f8f8f2", activebackground="#44475a", activeforeground="#8be9fd", bd=1, relief="ridge", highlightthickness=1, highlightbackground="#44475a", font=("Segoe UI", 10, "bold")
+        ).pack(pady=(2,10))
+        # Remover checkbutton de modo dev
+        # tk.Checkbutton(...)
 
     def _perguntar_continuar(self, funcao_etapa, etapa_numero):
         resposta = messagebox.askquestion(
@@ -194,11 +151,13 @@ class JanelaPrincipal:
     def _atualizar_painel(self, texto):
         if self.modo_dev:
             self.log_buffer.append(texto)
-            self.painel_log.delete("1.0", tk.END)
-            self.painel_log.insert(tk.END, "\n".join(self.log_buffer[-100:]))
+            # self.painel_log.delete("1.0", tk.END) # Removed as per edit hint
+            # self.painel_log.insert(tk.END, "\n".join(self.log_buffer[-100:])) # Removed as per edit hint
+            pass # No longer updating log panel
         else:
-            self.painel_log.delete("1.0", tk.END)
-            self.painel_log.insert(tk.END, texto)
+            # self.painel_log.delete("1.0", tk.END) # Removed as per edit hint
+            # self.painel_log.insert(tk.END, texto) # Removed as per edit hint
+            pass # No longer updating log panel
 
     def _alternar_modo(self):
         self.modo_dev = not self.modo_dev
@@ -206,12 +165,12 @@ class JanelaPrincipal:
             mostrar_alerta_visual("Modo desenvolvedor ativado", "Logs detalhados serão exibidos.", tipo="dev")
         else:
             mostrar_alerta_visual("Modo simples ativado", "Logs resumidos.", tipo="info")
-        self._atualizar_painel(
-            "Modo desenvolvedor ativado." if self.modo_dev else "Modo simples."
-        )
+        # self._atualizar_painel( # Removed as per edit hint
+        #     "Modo desenvolvedor ativado." if self.modo_dev else "Modo simples."
+        # )
 
     def log_mensagem(self, mensagem):
-        self._atualizar_painel(mensagem)
+        # self._atualizar_painel(mensagem) # Removed as per edit hint
         if self.modo_dev:
             registrar_log(mensagem)
 
@@ -219,19 +178,26 @@ class JanelaPrincipal:
         return self.caminho_planilha_dinamico
 
     def _mostrar_sobre(self):
-        # Tenta ler a versão do arquivo VERSION
+        # Busca robusta do arquivo VERSION com fallback de encoding (sem prints)
         try:
-            import os, sys
-            if getattr(sys, 'frozen', False):
-                base_dir = os.path.dirname(sys.executable)
-            else:
-                base_dir = os.path.dirname(os.path.abspath(__file__))
-            version_path = os.path.join(base_dir, '..', 'VERSION')
-            if os.path.exists(version_path):
-                with open(version_path, 'r', encoding='utf-8') as f:
-                    versao = f.read().strip()
-            else:
-                versao = 'desconhecida'
+            import os
+            versao = 'desconhecida'
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            paths = [
+                os.path.join(script_dir, 'VERSION'),
+                os.path.join(script_dir, '..', 'VERSION'),
+                os.path.join(os.getcwd(), 'VERSION'),
+            ]
+            for path in paths:
+                if os.path.exists(path):
+                    for encoding in ('utf-8', 'utf-16', 'latin1'):
+                        try:
+                            with open(path, 'r', encoding=encoding) as f:
+                                versao = f.read().strip()
+                            break
+                        except Exception:
+                            pass
+                    break
         except Exception:
             versao = 'desconhecida'
         messagebox.showinfo(
