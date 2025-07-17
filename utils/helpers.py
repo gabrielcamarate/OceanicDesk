@@ -54,15 +54,11 @@ def calcular_expressao(expr):
     Ignora símbolos como R$ e espaços.
     Retorna 0.0 se não conseguir calcular.
     """
-    mostrar_alerta_visual("Calculando expressão", f"Processando: {expr}", tipo="dev")
-    
     # Limpeza da expressão
     expr_original = expr
     expr = expr.replace(",", ".")
     expr = expr.replace("R$", "").replace("r$", "").strip()
     expr = re.sub(r"[^0-9+\-.\s]", "", expr)
-    
-    mostrar_alerta_visual("Expressão limpa", f"Original: {expr_original} | Limpa: {expr}", tipo="dev")
     
     try:
         resultado = eval(expr)  # seguro neste contexto após limpeza
@@ -96,7 +92,6 @@ def esperar_elemento(caminho_imagem, timeout=60, confidence=0.8):
             # imagem não encontrada nesta tentativa, só ignora e tenta de novo
             if tentativas % 10 == 0:
                 tempo_restante = int(timeout - (time.time() - inicio))
-                mostrar_alerta_visual("Elemento não encontrado", f"Tentativa {tentativas} - Restam {tempo_restante}s", tipo="warning")
         
         time.sleep(1)
     
