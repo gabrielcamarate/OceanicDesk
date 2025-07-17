@@ -178,26 +178,37 @@ class JanelaPrincipal:
         return self.caminho_planilha_dinamico
 
     def _mostrar_sobre(self):
-        # Busca robusta do arquivo VERSION com fallback de encoding (sem prints)
+        # Leitura robusta do arquivo VERSION (prioriza utf-8, só tenta outros encodings se der erro)
+        import os, sys
+        versao = 'desconhecida'
         try:
-            import os
-            versao = 'desconhecida'
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            paths = [
-                os.path.join(script_dir, 'VERSION'),
-                os.path.join(script_dir, '..', 'VERSION'),
-                os.path.join(os.getcwd(), 'VERSION'),
+            if getattr(sys, 'frozen', False):
+                base_dir = os.path.dirname(sys.executable)
+            else:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+            possiveis_caminhos = [
+                os.path.join(base_dir, '..', 'VERSION'),
+                os.path.join(base_dir, 'VERSION'),
+                os.path.join(base_dir, '..', '..', 'VERSION'),
             ]
-            for path in paths:
-                if os.path.exists(path):
-                    for encoding in ('utf-8', 'utf-16', 'latin1'):
-                        try:
-                            with open(path, 'r', encoding=encoding) as f:
-                                versao = f.read().strip()
-                            break
-                        except Exception:
-                            pass
-                    break
+            for caminho in possiveis_caminhos:
+                if os.path.exists(caminho):
+                    try:
+                        with open(caminho, 'r', encoding='utf-8') as f:
+                            v = f.read().strip()
+                            if v:
+                                versao = v
+                                break
+                    except Exception:
+                        for encoding in ['utf-16', 'latin1']:
+                            try:
+                                with open(caminho, 'r', encoding=encoding) as f:
+                                    v = f.read().strip()
+                                    if v:
+                                        versao = v
+                                        break
+                            except Exception:
+                                continue
         except Exception:
             versao = 'desconhecida'
         messagebox.showinfo(
