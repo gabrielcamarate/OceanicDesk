@@ -176,10 +176,7 @@ def etapa7_fechamento_caixa():
     mostrar_alerta_visual("Iniciando Etapa 7", "Fechamento de Caixa (EMSys)", tipo="info")
     
     # Acessando fechamento
-    mostrar_alerta_visual("Acessando EMSys", "Conectando ao sistema de fechamento...", tipo="info")
     acessar_fechamento_caixa(DATA_ONTEM)
-    mostrar_alerta_visual("EMSys acessado", "Sistema de fechamento aberto", tipo="success")
-    
     # Automatizando processo
     mostrar_alerta_visual("Automatizando fechamento", "Executando automação de caixa...", tipo="info")
     automatizar_fechamento_caixa()
