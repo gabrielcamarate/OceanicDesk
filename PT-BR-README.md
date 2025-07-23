@@ -129,6 +129,9 @@ Feito com ❤️ por Gabriel Camarate. Entre em contato!
 
 ## 📝 Changelog
 
+### v1.4.9
+- Refatoração: ajustes e refatoração em etapas.py para padronização e robustez
+
 ### v1.4.8
 - Refatoração e melhorias nas etapas do processo (`utils/etapas.py`)
 - Refatoração e melhorias em operações de Excel (`utils/excel_ops.py`)

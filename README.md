@@ -129,6 +129,9 @@ Made with ❤️ by Gabriel Camarate. Get in touch!
 
 ## 📝 Changelog
 
+### v1.4.9
+- Refactor: adjustments and refactoring in etapas.py for standardization and robustness
+
 ### v1.4.8
 - Refactoring and improvements in process steps (`utils/etapas.py`)
 - Refactoring and improvements in Excel operations (`utils/excel_ops.py`)

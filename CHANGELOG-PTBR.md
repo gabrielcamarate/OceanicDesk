@@ -1,5 +1,12 @@
 # Changelog - OceanicDesk
 
+## [1.4.9] - 2025-07-17
+
+### Refatoração
+- Ajustes e refatoração em etapas.py para padronização e robustez
+
+---
+
 ## [1.4.8] - 2025-07-13
 
 ### Refatoração e Melhorias

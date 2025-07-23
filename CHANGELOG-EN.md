@@ -1,5 +1,10 @@
 # Changelog - OceanicDesk
 
+## [1.4.9] - 2025-07-17
+
+### Refactor
+- Adjustments and refactoring in etapas.py for standardization and robustness
+
 ## [1.4.5] - 2024-12-19
 
 ### Fixed
