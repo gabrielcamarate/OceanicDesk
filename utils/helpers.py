@@ -63,10 +63,8 @@ def calcular_expressao(expr):
     try:
         resultado = eval(expr)  # seguro neste contexto após limpeza
         resultado_final = round(float(resultado), 2)
-        mostrar_alerta_visual("Cálculo realizado", f"Resultado: {resultado_final}", tipo="success")
         return resultado_final
     except Exception as e:
-        mostrar_alerta_visual("Erro no cálculo", f"Expressão inválida: {expr}", tipo="error")
         return 0.0
 
 
