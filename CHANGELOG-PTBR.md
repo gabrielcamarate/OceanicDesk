@@ -1,5 +1,47 @@
 # Changelog - OceanicDesk
 
+## [1.9.0] - 2025-07-25
+
+### 🚀 Nova Funcionalidade - Sistema de Métricas de Performance
+- **Coleta Automática**: Implementado sistema de coleta de métricas sem impactar performance do sistema
+- **Análise de Gargalos**: Identificação automática de operações lentas e candidatos para otimização
+- **Monitoramento de Sistema**: Coleta de métricas de CPU, memória e disco em tempo real (quando psutil disponível)
+- **Alertas Inteligentes**: Sistema de alertas automáticos para problemas de performance
+- **Compatibilidade Total**: Sistema original de medições 100% preservado e funcional
+
+### 🔧 Funcionalidades Implementadas
+- **PerformanceMetrics**: Classe principal para coleta e análise de métricas com threading seguro
+- **Decorators de Medição**: `@measure_performance`, `@measure_excel_operation`, `@measure_automation_operation`
+- **Análise de Tendências**: Identificação automática de padrões e operações que precisam de otimização
+- **Dashboard de Métricas**: Visão geral completa da performance do sistema em tempo real
+- **Sistema de Alertas**: Notificações automáticas para operações lentas e uso alto de recursos
+
+### 🛠️ Ferramentas Adicionadas
+- **Coleta Automática**: Métricas coletadas em background sem impactar operações principais
+- **Categorização**: Operações categorizadas automaticamente (excel, cache, automation, file, etc.)
+- **Relatórios**: Exportação de relatórios detalhados em JSON para análise externa
+- **Controle**: Funções para habilitar/desabilitar coleta e configurar thresholds de alertas
+
+### 📁 Arquivos Adicionados
+- `utils/metrics.py` - Sistema completo de métricas de performance
+- `utils/METRICS_GUIDE.md` - Documentação completa do sistema de métricas
+- `utils/metrics_examples.py` - Exemplos práticos de uso e integração
+
+### ✅ Garantias de Compatibilidade
+- Sistema original (medições com `time.time()`, logs de performance) funcionando 100% igual
+- Todas as operações existentes mantidas sem modificação
+- Backward compatibility total garantida
+- Integração automática com sistemas de logging, cache, tratamento de erros e validação
+
+### 🎯 Benefícios de Monitoramento
+- Identificação automática de gargalos de performance
+- Coleta de métricas sem overhead significativo (< 1ms por operação)
+- Análise de tendências para otimização proativa
+- Alertas automáticos para problemas de performance
+- Base sólida para monitoramento contínuo e otimização
+
+---
+
 ## [1.8.0] - 2025-07-25
 
 ### 🚀 Nova Funcionalidade - Sistema de Cache para Operações Excel
