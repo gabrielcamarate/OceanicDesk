@@ -1,5 +1,42 @@
 # Changelog - OceanicDesk
 
+## [1.5.0] - 2025-07-25
+
+### 🚀 New Feature - Structured Logging System
+- **JSON Structured Logging**: Implemented advanced logging system for automated analysis
+- **Performance Metrics**: Automatic tracking of operation execution times
+- **Advanced Error Handling**: Error logs with complete traceback and structured context
+- **Total Compatibility**: Original system 100% preserved and functional
+
+### 🔧 Technical Improvements
+- **Added Functions**:
+  - `log_operacao()` - Structured operation logging with detailed context
+  - `log_erro()` - Error logging with complete debugging information
+  - `log_performance()` - Automatic performance metrics
+- **StructuredLogger Class**: Advanced logger for specific component usage
+- **Decorators and Adapters**: Tools for gradual integration without modifying existing code
+
+### 📁 Added Files
+- `utils/LOGGING_GUIDE.md` - Complete logging system documentation
+- `utils/logging_examples.py` - Practical usage examples
+- `utils/logging_integration_example.py` - Integration examples without breaking code
+
+### ✅ Compatibility Guarantees
+- Original system (`logger.info()`, `registrar_log()`, `inicializar_logger()`) working 100% the same
+- All existing imports maintained
+- Original log format preserved
+- Total backward compatibility guaranteed
+- Structured logs in separate file (`structured_log_YYYY-MM-DD.log`)
+
+### 🎯 Benefits
+- Automated log analysis in JSON format
+- Advanced debugging with structured context
+- Automatic performance monitoring
+- Gradual integration without impact on current system
+- Solid foundation for future observability improvements
+
+---
+
 ## [1.4.9] - 2025-07-17
 
 ### Refactor
