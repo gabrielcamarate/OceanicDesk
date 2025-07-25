@@ -1,5 +1,46 @@
 # Changelog - OceanicDesk
 
+## [1.6.0] - 2025-07-25
+
+### 🚀 New Feature - Centralized Error Handling System
+- **Custom Exceptions**: Implemented specific exception system for different error types
+- **Centralized Handlers**: Consistent and automatic error handling with structured context
+- **Logging Integration**: Automatic error logs with detailed information
+- **Total Compatibility**: Original try/except system 100% preserved and functional
+
+### 🔧 Implemented Exceptions
+- **FileOperationError**: File-related errors (Excel, backup, etc.)
+- **SystemConnectionError**: External system connection errors (AutoSystem, EMSys)
+- **DataValidationError**: Data validation errors (invalid values, incorrect formats)
+- **AutomationError**: Automation errors (pyautogui, OCR, etc.)
+- **ConfigurationError**: Configuration errors (.env, paths, etc.)
+
+### 🛠️ Added Tools
+- **ErrorHandler**: Class for automatic conversion of standard errors to custom exceptions
+- **Decorators**: `@handle_file_operations`, `@handle_data_validation` for automatic handling
+- **safe_execute()**: Safe function execution with fallback on error
+- **get_error_context()**: Detailed context extraction from any exception
+
+### 📁 Added Files
+- `utils/exceptions.py` - Complete centralized error handling system
+- `utils/EXCEPTIONS_GUIDE.md` - Complete exception system documentation
+- `utils/exceptions_examples.py` - Practical usage and integration examples
+
+### ✅ Compatibility Guarantees
+- Original system (`try/except`, `raise`, `logger.error()`) working 100% the same
+- All existing error handling maintained
+- Total backward compatibility guaranteed
+- Automatic integration with structured logging system (v1.5.0)
+
+### 🎯 Benefits
+- Structured context for advanced debugging
+- Consistent error handling throughout the system
+- Automatic logs with detailed information
+- Gradual integration without impact on existing code
+- Solid foundation for monitoring and error analysis
+
+---
+
 ## [1.5.0] - 2025-07-25
 
 ### 🚀 New Feature - Structured Logging System

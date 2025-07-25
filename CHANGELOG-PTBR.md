@@ -1,5 +1,46 @@
 # Changelog - OceanicDesk
 
+## [1.6.0] - 2025-07-25
+
+### 🚀 Nova Funcionalidade - Sistema de Tratamento de Erros Centralizado
+- **Exceções Customizadas**: Implementado sistema de exceções específicas para diferentes tipos de erro
+- **Handlers Centralizados**: Tratamento consistente e automático de erros com contexto estruturado
+- **Integração com Logging**: Logs automáticos de erros com informações detalhadas
+- **Compatibilidade Total**: Sistema original de try/except 100% preservado e funcional
+
+### 🔧 Exceções Implementadas
+- **FileOperationError**: Erros relacionados a arquivos (Excel, backup, etc.)
+- **SystemConnectionError**: Erros de conexão com sistemas externos (AutoSystem, EMSys)
+- **DataValidationError**: Erros de validação de dados (valores inválidos, formatos incorretos)
+- **AutomationError**: Erros durante automação (pyautogui, OCR, etc.)
+- **ConfigurationError**: Erros de configuração (.env, caminhos, etc.)
+
+### 🛠️ Ferramentas Adicionadas
+- **ErrorHandler**: Classe para conversão automática de erros padrão em exceções customizadas
+- **Decorators**: `@handle_file_operations`, `@handle_data_validation` para tratamento automático
+- **safe_execute()**: Execução segura de funções com fallback em caso de erro
+- **get_error_context()**: Extração de contexto detalhado de qualquer exceção
+
+### 📁 Arquivos Adicionados
+- `utils/exceptions.py` - Sistema completo de tratamento de erros centralizado
+- `utils/EXCEPTIONS_GUIDE.md` - Documentação completa do sistema de exceções
+- `utils/exceptions_examples.py` - Exemplos práticos de uso e integração
+
+### ✅ Garantias de Compatibilidade
+- Sistema original (`try/except`, `raise`, `logger.error()`) funcionando 100% igual
+- Todos os tratamentos de erro existentes mantidos
+- Backward compatibility total garantida
+- Integração automática com sistema de logging estruturado (v1.5.0)
+
+### 🎯 Benefícios
+- Contexto estruturado para debugging avançado
+- Tratamento consistente de erros em todo o sistema
+- Logs automáticos com informações detalhadas
+- Integração gradual sem impacto no código existente
+- Base sólida para monitoramento e análise de erros
+
+---
+
 ## [1.5.0] - 2025-07-25
 
 ### 🚀 Nova Funcionalidade - Sistema de Logging Estruturado
