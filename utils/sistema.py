@@ -543,10 +543,17 @@ def posto_chacaltaya():
     pyautogui.click(155,38)
     time.sleep(3)
     acessar_relatorio_subcategoria()
-    relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem, chacal=True)
-    relatorio_bebida_nao_alcoolica(ontem, chacal=True)
-    relatorio_bomboniere(ontem, chacal=True)
-    relatorio_cerveja(ontem, chacal=True)
-    relatorio_food(ontem, chacal=True)
-    relatorio_cigarro(ontem, chacal=True)
-    relatorio_isqueiros(ontem, chacal=True)
+    
+    relatorios = [
+        ("Combustíveis", lambda: relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem, chacal=True)),
+        ("Bebidas não alcoólicas", lambda: relatorio_bebida_nao_alcoolica(ontem, chacal=True)),
+        ("Bomboniere", lambda: relatorio_bomboniere(ontem, chacal=True)),
+        ("Cerveja", lambda: relatorio_cerveja(ontem, chacal=True)),
+        ("Food", lambda: relatorio_food(ontem, chacal=True)),
+        ("Cigarro", lambda: relatorio_cigarro(ontem, chacal=True)),
+        ("Isqueiros", lambda: relatorio_isqueiros(ontem, chacal=True))
+    ]
+    
+    for nome, func in relatorios:
+        print(f"Gerando relatório de {nome}...")
+        func()
