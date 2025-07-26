@@ -24,9 +24,8 @@ from datetime import datetime
 load_dotenv()
 
 hoje = datetime.today()
-# dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
-dias_do_mes = 30
-LETRA_PLANILHA = "G"
+dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
+LETRA_PLANILHA = "H"
 
 def copiar_intervalo_k5_r14(wb, data_referencia):
     dia_origem = data_referencia - timedelta(days=2)

@@ -4,11 +4,16 @@ import os
 from openpyxl import load_workbook
 from dotenv import load_dotenv
 from utils.excel_ops import LETRA_PLANILHA
+import calendar
+from datetime import datetime
 
 # Esses dois abaixo você precisa garantir que existem em outro módulo
 from utils.extratores import salvar_planilha_emsys, extrair_food_tmp
 from interfaces.alerta_visual import mostrar_alerta_visual, mostrar_alerta_progresso
 
+hoje = datetime.today()
+dias_do_mes = calendar.monthrange(hoje.year, hoje.month)[1]
+LETRA_PLANILHA = "H"
 
 def extrair_valores_e_somar(chacal=False):
     mostrar_alerta_visual("Iniciando extração Food", f"Modo: {'Chacaltaya' if chacal else 'Oceanic'}", tipo="info")
@@ -94,7 +99,7 @@ def atualizar_meu_controle(dia_fim, chacal=False):
     ws_controle = wb_controle.active
 
     # Criar a fórmula com base no total e dia_fim
-    formula = f"={valor_str}/{dia_fim}*30"
+    formula = f"={valor_str}/{dia_fim}*{dias_do_mes}"
     mostrar_alerta_visual("Fórmula criada", f"Fórmula: {formula}", tipo="dev")
 
     # Atualizar a célula G42

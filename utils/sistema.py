@@ -504,11 +504,19 @@ def relatorio_isqueiros(ontem, chacal=False):
     pyautogui.write("0")
     pyautogui.press("tab")
     time.sleep(0.5)
-    pyautogui.write("0")
+    if chacal:
+        pyautogui.write("0")
+    else:
+        pyautogui.write("56")
     pyautogui.press("tab")
     time.sleep(0.5)
-    pyautogui.write("538")
-    pyautogui.press("tab", presses=12)
+    
+    if chacal:
+        pyautogui.write("568")
+        pyautogui.press("tab", presses=12)
+    else:
+        pyautogui.write("0")
+        pyautogui.press("tab", presses=12)
     time.sleep(0.5)
     pyautogui.press("enter")
     

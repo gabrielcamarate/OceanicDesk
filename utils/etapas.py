@@ -197,26 +197,26 @@ def etapa8_projecao_de_vendas() -> None:
     ontem = ontem.day
     
     # Processo comentado - descomente conforme necessário
-    # atualizando_planilhas_projecao()
-    # acessar_relatorio_subcategoria()
+    atualizando_planilhas_projecao()
+    acessar_relatorio_subcategoria()
     
-    # # Relatórios específicos
-    # relatorios = [
-    #     ("Combustíveis", lambda: relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)),
-    #     ("Bebidas não alcoólicas", lambda: relatorio_bebida_nao_alcoolica(ontem)),
-    #     ("Bomboniere", lambda: relatorio_bomboniere(ontem)),
-    #     ("Cerveja", lambda: relatorio_cerveja(ontem)),
-    #     ("Food", lambda: relatorio_food(ontem)),
-    #     ("Cigarro", lambda: relatorio_cigarro(ontem)),
-    #     ("Isqueiros", lambda: relatorio_isqueiros(ontem))
-    # ]
+    # Relatórios específicos
+    relatorios = [
+        ("Combustíveis", lambda: relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)),
+        ("Bebidas não alcoólicas", lambda: relatorio_bebida_nao_alcoolica(ontem)),
+        ("Bomboniere", lambda: relatorio_bomboniere(ontem)),
+        ("Cerveja", lambda: relatorio_cerveja(ontem)),
+        ("Food", lambda: relatorio_food(ontem)),
+        ("Cigarro", lambda: relatorio_cigarro(ontem)),
+        ("Isqueiros", lambda: relatorio_isqueiros(ontem))
+    ]
     
-    # for nome, func in relatorios:
-    #     print(f"Gerando relatório de {nome}...")
-    #     func()
+    for nome, func in relatorios:
+        print(f"Gerando relatório de {nome}...")
+        func()
     
-    # # Posto Chacaltaya - único alerta durante pyautogui
-    # mostrar_alerta_visual("Processando Chacaltaya", "Atualizando dados do posto...", tipo="info")
+    # Posto Chacaltaya - único alerta durante pyautogui
+    mostrar_alerta_visual("Processando Chacaltaya", "Atualizando dados do posto...", tipo="info")
     posto_chacaltaya()
     
     mostrar_alerta_visual("Etapa 8 Concluída", "Projeção de vendas finalizada com sucesso!", tipo="success")
