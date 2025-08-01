@@ -196,12 +196,15 @@ def etapa8_projecao_de_vendas() -> None:
     """
     # SISTEMA AUTOMÁTICO DE DATAS - Substitui lógica manual
     from utils.dynamic_config import enhanced_etapa8_dates
+    from datetime import datetime
+
     dia_inicio, dia_fim, ontem = enhanced_etapa8_dates()
-    
+    hoje = datetime.now()  # Mantém variável hoje para compatibilidade
+
     # Processo comentado - descomente conforme necessário
     atualizando_planilhas_projecao()
     acessar_relatorio_subcategoria()
-    
+
     # Relatórios específicos
     relatorios = [
         ("Combustíveis", lambda: relatorio_combustiveis(hoje, dia_inicio, dia_fim, ontem)),

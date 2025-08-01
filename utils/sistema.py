@@ -527,11 +527,18 @@ def relatorio_isqueiros(ontem, chacal=False):
     
     
 def posto_chacaltaya():
-    hoje = datetime.now()
-    dia_inicio = hoje.replace(day=1).strftime("%d/%m/%Y")
-    dia_fim = (hoje - timedelta(days=1)).strftime("%d/%m/%Y")
-    ontem = hoje - timedelta(days=1)
-    ontem = ontem.day
+    """
+    Função para processar relatórios do Posto Chacaltaya.
+
+    SISTEMA AUTOMÁTICO: Datas calculadas automaticamente baseadas no dia atual:
+    - Dia 1: Usa mês anterior completo (01/07/2025 até 31/07/2025)
+    - Outros dias: Usa do dia 1 do mês atual até ontem
+    """
+    # SISTEMA AUTOMÁTICO DE DATAS - Substitui lógica manual
+    from utils.dynamic_config import enhanced_etapa8_dates
+
+    dia_inicio, dia_fim, ontem = enhanced_etapa8_dates()
+    hoje = datetime.now()  # Mantém variável hoje para compatibilidade
     
     pyautogui.click(83,44)    
     pyautogui.click(29,81, duration=0.2) 
