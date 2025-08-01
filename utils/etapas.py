@@ -189,12 +189,14 @@ def etapa8_projecao_de_vendas() -> None:
     Executa a Etapa 8, que inclui:
     - Atualização de planilhas projeção
     - Atualização completa de relatórios do Meu Controle
+
+    SISTEMA AUTOMÁTICO: Datas calculadas automaticamente baseadas no dia atual:
+    - Dia 1: Usa mês anterior completo (01/07/2025 até 31/07/2025)
+    - Outros dias: Usa do dia 1 do mês atual até ontem
     """
-    hoje = datetime.now()
-    dia_inicio = hoje.replace(day=1).strftime("%d/%m/%Y")
-    dia_fim = (hoje - timedelta(days=1)).strftime("%d/%m/%Y")
-    ontem = hoje - timedelta(days=1)
-    ontem = ontem.day
+    # SISTEMA AUTOMÁTICO DE DATAS - Substitui lógica manual
+    from utils.dynamic_config import enhanced_etapa8_dates
+    dia_inicio, dia_fim, ontem = enhanced_etapa8_dates()
     
     # Processo comentado - descomente conforme necessário
     atualizando_planilhas_projecao()

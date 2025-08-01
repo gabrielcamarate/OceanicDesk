@@ -621,3 +621,81 @@ def enable_auto_updates():
 def is_auto_updates_enabled() -> bool:
     """Verifica se atualizações automáticas estão habilitadas"""
     return _auto_updates_enabled
+
+
+def get_system_status() -> Dict[str, Any]:
+    """
+    Retorna status completo do sistema de configuração dinâmica.
+    Útil para debugging e monitoramento.
+    """
+    current_day = datetime.now().day
+    mes_info = get_current_month_info()
+
+    # Verifica próximas ações
+    next_actions = []
+    if current_day == 1:
+        next_actions.append("Usando mês anterior completo para relatórios")
+    elif current_day == 2:
+        next_actions.append("Verificando se caminhos precisam ser atualizados")
+    else:
+        days_until_next_month = calendar.monthrange(datetime.now().year, datetime.now().month)[1] - current_day + 1
+        next_actions.append(f"Próxima atualização em {days_until_next_month} dias (dia 1)")
+
+    # Obtém datas atuais
+    dia_inicio, dia_fim = get_dynamic_date_range()
+
+    return {
+        "system_active": True,
+        "current_day": current_day,
+        "current_month": mes_info,
+        "auto_updates_enabled": is_auto_updates_enabled(),
+        "date_range": {
+            "dia_inicio": dia_inicio,
+            "dia_fim": dia_fim,
+            "logic": "previous_month" if current_day == 1 else "current_month_to_yesterday"
+        },
+        "next_actions": next_actions,
+        "paths_validation": validate_monthly_paths(),
+        "backup_available": dynamic_config.settings.ENV_BACKUP_DIR.exists()
+    }
+
+
+def print_system_status():
+    """
+    Imprime status do sistema de forma amigável.
+    Útil para debugging e verificação manual.
+    """
+    status = get_system_status()
+
+    print("\n" + "=" * 60)
+    print("🔧 STATUS DO SISTEMA DE CONFIGURAÇÃO DINÂMICA")
+    print("=" * 60)
+
+    print(f"📅 Dia atual: {status['current_day']}")
+    print(f"📆 Mês atual: {status['current_month']['nome_cap']} de {status['current_month']['ano']}")
+    print(f"⚙️ Atualizações automáticas: {'✅ Habilitadas' if status['auto_updates_enabled'] else '❌ Desabilitadas'}")
+
+    print(f"\n📊 Período de relatórios:")
+    print(f"   De: {status['date_range']['dia_inicio']}")
+    print(f"   Até: {status['date_range']['dia_fim']}")
+    print(f"   Lógica: {status['date_range']['logic']}")
+
+    print(f"\n🎯 Próximas ações:")
+    for action in status['next_actions']:
+        print(f"   • {action}")
+
+    print(f"\n📁 Validação de caminhos:")
+    paths_validation = status['paths_validation']
+    valid_count = sum(paths_validation.values())
+    total_count = len(paths_validation)
+    print(f"   ✅ Válidos: {valid_count}/{total_count}")
+
+    if valid_count < total_count:
+        print("   ⚠️ Caminhos com problemas:")
+        for path_name, is_valid in paths_validation.items():
+            if not is_valid:
+                print(f"      • {path_name}")
+
+    print(f"\n💾 Backup: {'✅ Disponível' if status['backup_available'] else '❌ Não configurado'}")
+
+    print("=" * 60)
