@@ -1,5 +1,60 @@
 # Changelog - OceanicDesk
 
+## [2.0.0] - 2025-08-01
+
+### 🚀 REVOLUTIONARY FEATURE - Dynamic Configuration System
+- **Complete Monthly Automation**: Eliminates 100% of mandatory monthly manual maintenance
+- **Automatic Date Updates**: On day 1 of month, automatically uses complete previous month
+- **Automatic Path Updates**: On day 2 of month, automatically updates all monthly paths
+- **Automatic Backup**: .env backup before any modification with timestamp
+- **Total Compatibility**: Original configuration system 100% preserved and functional
+
+### 🎯 PROBLEM DEFINITIVELY SOLVED
+- **BEFORE**: Mandatory manual maintenance every month (dates on day 1, paths on day 2)
+- **NOW**: Zero manual maintenance - system works automatically every month
+- **BENEFIT**: Eliminates risk of human errors and forgetfulness on critical dates
+
+### 🔧 Implemented Features
+- **DynamicConfigManager**: Main class for automatic configuration management
+- **Intelligent Date Logic**: Day 1 = complete previous month, other days = day 1 until yesterday
+- **Path Updates**: Automatic pattern recognition and conversion to new month
+- **Backup System**: Automatic backup with timestamp before any modification
+- **Path Validation**: Automatic verification if all monthly files exist
+
+### 🛠️ Added Tools
+- **get_dynamic_date_range()**: Replaces manual logic in etapa8_projecao_de_vendas()
+- **auto_update_config()**: Automatic verification and execution of necessary updates
+- **enhanced_etapa8_dates()**: Improved version with automatic dates for etapa8
+- **validate_monthly_paths()**: Validation of all monthly paths
+- **Backup and Rollback**: Complete backup and recovery system
+
+### 📁 Added Files
+- `utils/dynamic_config.py` - Complete dynamic configuration system
+- `utils/DYNAMIC_CONFIG_GUIDE.md` - Complete system documentation
+- `utils/dynamic_config_examples.py` - Practical usage and integration examples
+
+### ✅ Compatibility Guarantees
+- Original system (.env, load_dotenv(), os.getenv()) working 100% the same
+- All existing configurations maintained without modification
+- Total backward compatibility guaranteed
+- Automatic integration with logging, cache, metrics, errors and validation
+
+### 🎯 Implemented Automation
+- **Day 1**: Automatically uses complete previous month period (01/07/2025 until 31/07/2025)
+- **Day 2**: Automatically updates 6 monthly paths (JULY → AUGUST)
+- **Backup**: Automatic before any modification (.env_backups/)
+- **Validation**: Automatic path integrity verification
+- **Logging**: Detailed logging of all automatic operations
+
+### 🔄 Recognized Path Patterns
+- `/2025/07 - JULHO/` → `/2025/08 - AGOSTO/`
+- `07-VENDA CHACALTAYA LOJA JULHO 2025` → `08-VENDA CHACALTAYA LOJA AGOSTO 2025`
+- `Vendas Julho.xlsx` → `Vendas Agosto.xlsx`
+- `Meu Controle Julho - 2025.xlsx` → `Meu Controle Agosto - 2025.xlsx`
+- `Cópia de Julho - 2025.xlsx` → `Cópia de Agosto - 2025.xlsx`
+
+---
+
 ## [1.9.0] - 2025-07-25
 
 ### 🚀 New Feature - Performance Metrics System

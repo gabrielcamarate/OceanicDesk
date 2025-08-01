@@ -1,5 +1,60 @@
 # Changelog - OceanicDesk
 
+## [2.0.0] - 2025-08-01
+
+### 🚀 FUNCIONALIDADE REVOLUCIONÁRIA - Sistema de Configuração Dinâmica
+- **Automação Mensal Completa**: Elimina 100% da manutenção manual mensal obrigatória
+- **Atualização Automática de Datas**: No dia 1 do mês, automaticamente usa mês anterior completo
+- **Atualização Automática de Caminhos**: No dia 2 do mês, automaticamente atualiza todos os caminhos mensais
+- **Backup Automático**: Backup do .env antes de qualquer modificação com timestamp
+- **Compatibilidade Total**: Sistema original de configurações 100% preservado e funcional
+
+### 🎯 PROBLEMA RESOLVIDO DEFINITIVAMENTE
+- **ANTES**: Manutenção manual obrigatória todo mês (datas no dia 1, caminhos no dia 2)
+- **AGORA**: Zero manutenção manual - sistema funciona automaticamente todos os meses
+- **BENEFÍCIO**: Elimina risco de erros humanos e esquecimentos em datas críticas
+
+### 🔧 Funcionalidades Implementadas
+- **DynamicConfigManager**: Classe principal para gerenciamento automático de configurações
+- **Lógica de Datas Inteligente**: Dia 1 = mês anterior completo, outros dias = dia 1 até ontem
+- **Atualização de Caminhos**: Reconhecimento automático de padrões e conversão para novo mês
+- **Sistema de Backup**: Backup automático com timestamp antes de qualquer modificação
+- **Validação de Caminhos**: Verificação automática se todos os arquivos mensais existem
+
+### 🛠️ Ferramentas Adicionadas
+- **get_dynamic_date_range()**: Substitui lógica manual em etapa8_projecao_de_vendas()
+- **auto_update_config()**: Verificação e execução automática de atualizações necessárias
+- **enhanced_etapa8_dates()**: Versão melhorada com datas automáticas para etapa8
+- **validate_monthly_paths()**: Validação de todos os caminhos mensais
+- **Backup e Rollback**: Sistema completo de backup e recuperação
+
+### 📁 Arquivos Adicionados
+- `utils/dynamic_config.py` - Sistema completo de configuração dinâmica
+- `utils/DYNAMIC_CONFIG_GUIDE.md` - Documentação completa do sistema
+- `utils/dynamic_config_examples.py` - Exemplos práticos de uso e integração
+
+### ✅ Garantias de Compatibilidade
+- Sistema original (.env, load_dotenv(), os.getenv()) funcionando 100% igual
+- Todas as configurações existentes mantidas sem modificação
+- Backward compatibility total garantida
+- Integração automática com logging, cache, métricas, erros e validação
+
+### 🎯 Automação Implementada
+- **Dia 1**: Automaticamente usa período do mês anterior completo (01/07/2025 até 31/07/2025)
+- **Dia 2**: Automaticamente atualiza 6 caminhos mensais (JULHO → AGOSTO)
+- **Backup**: Automático antes de qualquer modificação (.env_backups/)
+- **Validação**: Verificação automática de integridade dos caminhos
+- **Logging**: Registro detalhado de todas as operações automáticas
+
+### 🔄 Padrões de Caminhos Reconhecidos
+- `/2025/07 - JULHO/` → `/2025/08 - AGOSTO/`
+- `07-VENDA CHACALTAYA LOJA JULHO 2025` → `08-VENDA CHACALTAYA LOJA AGOSTO 2025`
+- `Vendas Julho.xlsx` → `Vendas Agosto.xlsx`
+- `Meu Controle Julho - 2025.xlsx` → `Meu Controle Agosto - 2025.xlsx`
+- `Cópia de Julho - 2025.xlsx` → `Cópia de Agosto - 2025.xlsx`
+
+---
+
 ## [1.9.0] - 2025-07-25
 
 ### 🚀 Nova Funcionalidade - Sistema de Métricas de Performance
